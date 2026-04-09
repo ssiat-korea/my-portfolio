@@ -109,9 +109,23 @@
         .keyword-list { color: #0f0; font-size: 0.85rem; font-weight: 400; line-height: 1.5; }
         .career-box a { pointer-events: auto; position: relative; z-index: 10; }
 
-        /* 올라운더 비디오 섹션 */
-        .video-hero { position: relative; width: 100%; height: 75vh; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 20px; border: 1px solid #2a332a; box-shadow: 0 10px 40px rgba(0,0,0,0.8); margin-top: 10px; background-color: #111; }
-        #bg-video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%, -50%); z-index: 1; filter: brightness(0.4) contrast(1.1); transition: opacity 0.8s ease-in-out; object-fit: cover; }
+        /* 올라운더 비디오 섹션 (유튜브 백그라운드용 CSS 최적화) */
+        .video-hero { position: relative; width: 100%; height: 75vh; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 20px; border: 1px solid #2a332a; box-shadow: 0 10px 40px rgba(0,0,0,0.8); margin-top: 10px; background-color: #000; }
+        
+        #yt-player-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150vw; /* 검은 여백을 숨기기 위해 아주 크게 설정 */
+            height: 150vh;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            pointer-events: none; /* 유튜브 클릭 방지 */
+            filter: brightness(0.5) contrast(1.1);
+            opacity: 1; /* 기본적으로 보이게 처리하여 검은 화면 방지 */
+            transition: opacity 0.8s ease-in-out;
+        }
+
         .overlay-content { position: relative; z-index: 2; text-align: center; max-width: 900px; padding: 0 20px; }
         .category-tag { display: inline-block; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.3); padding: 8px 20px; border-radius: 30px; font-size: 0.95rem; font-weight: 500; margin-bottom: 24px; backdrop-filter: blur(8px); letter-spacing: 0.5px; transition: all 0.5s ease; color: #fff;}
         .video-hero h3 { font-size: 3.5rem; margin: 0 0 20px 0; font-weight: 800; letter-spacing: -1.5px; line-height: 1.2; text-shadow: 0 4px 20px rgba(0,0,0,0.5); transition: all 0.5s ease; color: #fff; }
@@ -345,7 +359,9 @@
         <p class="section-subtitle">기획, 디자인, 운영 전반을 유기적으로 연결하는 압도적 퍼포먼스</p>
         
         <div class="video-hero">
-            <video id="bg-video" autoplay muted playsinline></video>
+            <div id="yt-player-container">
+                <div id="youtube-player"></div>
+            </div>
             
             <div class="overlay-content">
                 <div class="category-tag" id="current-tag">로딩 중...</div>
@@ -483,7 +499,6 @@
             slider.scrollLeft = scrollLeft - walk;
         });
 
-        // 히어로 배경 이미지 스크롤 페이드 아웃 효과 로직
         window.addEventListener('scroll', function() {
             const heroBg = document.getElementById('hero-bg');
             if(heroBg) {
@@ -497,40 +512,45 @@
             }
         });
 
-        // 영상 플레이리스트 세팅
+        /* =========================================
+           유튜브 API 및 순차 재생 로직 (7초 타이머)
+        ========================================= */
         const playlist = [
             {
-                url: "./video1.mp4",
+                videoId: "8X2gB-7iORM", // video1
                 tag: "Part 1: Digital Craft",
                 title: "비주얼 & 미디어 툴링",
                 desc: "포토샵, 일러스트부터 영상 편집과 최신 AI 툴까지, 막힘없는 실무 감각으로 결과물을 도출합니다."
             },
             {
-                url: "./video2.mp4",
+                videoId: "XRXtXTko50Y", // video2
                 tag: "Part 2: Human-Centered",
                 title: "사람을 향한 인사이트",
                 desc: "상담심리학적 이해를 바탕으로 사람의 마음을 읽고, 타겟에 깊이 공감하는 기획을 전개합니다."
             },
             {
-                url: "./video3.mp4",
+                videoId: "H3gLDVPmpak", // video3
                 tag: "Part 3: Synergy",
                 title: "경계를 넘는 올라운더",
                 desc: "기획, 디자인, 현장 운영 전반을 유기적으로 연결하여 비즈니스의 시너지를 이끌어냅니다."
             }
         ];
 
-        const videoElement = document.getElementById('bg-video');
-        const tagElement = document.getElementById('current-tag');
-        const titleElement = document.getElementById('main-title');
-        const descElement = document.getElementById('sub-desc');
-        const progressContainer = document.getElementById('progress-container');
-
+        let ytPlayer;
         let currentIndex = 0;
         let progressFills = [];
         let progressInterval;
         let timeCheckInterval;
-        const PLAY_DURATION = 7; // 각 영상 재생 시간 (초)
+        let playStartTime = 0;
+        const PLAY_DURATION = 7; // 각 영상 7초 재생
 
+        const progressContainer = document.getElementById('progress-container');
+        const tagElement = document.getElementById('current-tag');
+        const titleElement = document.getElementById('main-title');
+        const descElement = document.getElementById('sub-desc');
+        const playerContainer = document.getElementById('yt-player-container');
+
+        // 프로그레스 바 UI 생성
         function initProgressBars() {
             progressContainer.innerHTML = '';
             progressFills = [];
@@ -545,49 +565,96 @@
             });
         }
 
-        function playVideo(index) {
-            if(!videoElement) return; 
-            const data = playlist[index];
+        // 유튜브 API 스크립트 동적 로드
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // API가 준비되면 호출되는 함수
+        function onYouTubeIframeAPIReady() {
+            initProgressBars();
             
-            videoElement.style.opacity = 0;
+            ytPlayer = new YT.Player('youtube-player', {
+                height: '100%',
+                width: '100%',
+                videoId: playlist[0].videoId,
+                playerVars: {
+                    'autoplay': 1, // 자동 재생
+                    'mute': 1, // 크롬 정책상 자동재생은 음소거 필수
+                    'controls': 0, // 컨트롤러 숨김
+                    'showinfo': 0,
+                    'modestbranding': 1, // 유튜브 로고 최소화
+                    'rel': 0, // 관련 동영상 숨김
+                    'disablekb': 1, // 키보드 조작 방지
+                    'playsinline': 1 // 모바일 전체화면 방지
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        // 🚨 이 부분이 핵심! 브라우저 정책을 뚫고 무조건 음소거로 재생하게 만듭니다.
+        function onPlayerReady(event) {
+            event.target.mute(); 
+            event.target.playVideo();
+        }
+
+        // 재생 상태가 변할 때마다 호출
+        function onPlayerStateChange(event) {
+            // 영상이 재생 중(PLAYING)일 때
+            if (event.data == YT.PlayerState.PLAYING) {
+                // 텍스트 교체 및 페이드 인
+                updateUIText(currentIndex);
+                playerContainer.style.opacity = 1;
+                
+                // 시간 측정 시작
+                playStartTime = Date.now();
+                manageProgressBar(currentIndex);
+                checkVideoTime();
+            }
+        }
+
+        // 텍스트 내용 및 투명도 전환 효과
+        function updateUIText(index) {
+            const data = playlist[index];
             tagElement.style.opacity = 0;
             titleElement.style.opacity = 0;
             descElement.style.opacity = 0;
             
             setTimeout(() => {
-                videoElement.src = data.url;
-                videoElement.currentTime = 0; // 재생 위치 초기화
+                tagElement.innerText = data.tag;
+                titleElement.innerText = data.title;
+                descElement.innerText = data.desc;
                 
-                let playPromise = videoElement.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        tagElement.innerText = data.tag;
-                        titleElement.innerText = data.title;
-                        descElement.innerText = data.desc;
-                        
-                        videoElement.style.opacity = 1;
-                        tagElement.style.opacity = 1;
-                        titleElement.style.opacity = 1;
-                        descElement.style.opacity = 1;
-                        
-                        manageProgressBar(index);
-                        checkVideoTime(index); // 5초 체크 함수 실행
-                    }).catch(error => {
-                        console.error("비디오 재생 실패:", error);
-                        tagElement.innerText = "Video Error";
-                        titleElement.innerText = "비디오를 로드할 수 없습니다";
-                        descElement.innerText = "로컬 영상 파일(video1.mp4 등)이 정확한 경로에 있는지 확인해주세요.";
-                        
-                        videoElement.style.opacity = 1;
-                        tagElement.style.opacity = 1;
-                        titleElement.style.opacity = 1;
-                        descElement.style.opacity = 1;
-                    });
-                }
-            }, 600);
+                tagElement.style.opacity = 1;
+                titleElement.style.opacity = 1;
+                descElement.style.opacity = 1;
+            }, 400); // 0.4초 대기 후 변경하여 부드럽게
         }
 
+        // 7초 도달 시 다음 영상으로
+        function playNextVideo() {
+            clearInterval(timeCheckInterval);
+            clearInterval(progressInterval);
+            
+            // 화면 부드럽게 페이드 아웃 (암전)
+            playerContainer.style.opacity = 0;
+            
+            setTimeout(() => {
+                currentIndex++;
+                if (currentIndex >= playlist.length) {
+                    currentIndex = 0;
+                }
+                // 다음 유튜브 영상 ID 로드 및 재생
+                ytPlayer.loadVideoById(playlist[currentIndex].videoId);
+                // 로드 완료 후 onPlayerStateChange가 PLAYING을 감지하여 다시 화면을 켬
+            }, 800); // 페이드 아웃 대기 시간
+        }
+
+        // 하단 프로그레스 바 퍼센트 채우기
         function manageProgressBar(index) {
             clearInterval(progressInterval);
             progressFills.forEach((fill, i) => {
@@ -597,42 +664,26 @@
 
             const currentFill = progressFills[index];
             progressInterval = setInterval(() => {
-                // 전체 길이가 아닌 5초 기준으로 퍼센트 계산
-                const percentage = (videoElement.currentTime / PLAY_DURATION) * 100;
+                const elapsed = (Date.now() - playStartTime) / 1000;
+                const percentage = (elapsed / PLAY_DURATION) * 100;
                 currentFill.style.width = `${Math.min(percentage, 100)}%`;
             }, 50);
         }
 
-        // 5초가 지나면 다음 영상으로 넘기는 로직
-        function checkVideoTime(index) {
+        // 정확히 7초가 지났는지 체크하는 타이머
+        function checkVideoTime() {
             clearInterval(timeCheckInterval);
             timeCheckInterval = setInterval(() => {
-                if (videoElement.currentTime >= PLAY_DURATION) {
-                    clearInterval(timeCheckInterval);
-                    currentIndex++;
-                    if (currentIndex >= playlist.length) {
-                        currentIndex = 0;
-                    }
-                    playVideo(currentIndex);
+                const elapsed = (Date.now() - playStartTime) / 1000;
+                if (elapsed >= PLAY_DURATION) {
+                    playNextVideo();
                 }
             }, 100);
         }
 
-        if(videoElement) {
-            // 영상 원본 길이가 5초보다 짧아서 먼저 끝날 경우를 대비한 안전 장치
-            videoElement.addEventListener('ended', () => {
-                clearInterval(timeCheckInterval);
-                currentIndex++;
-                if (currentIndex >= playlist.length) {
-                    currentIndex = 0;
-                }
-                playVideo(currentIndex);
-            });
-            
-            initProgressBars();
-            playVideo(currentIndex);
-        }
-
+        /* =========================================
+           AI 챗봇 로직
+        ========================================= */
         const answers = {
             'q1': "전상현 기획자는 지난 20여 년간 통신, 커머스, 건설, 미디어는 물론 <b>해외 리테일과 로컬 F&B 창업</b>까지 다양한 산업을 거치며 'B2B/B2C 세일즈 내공'과 '실무 기술력'을 동시에 축적한 올라운더(All-rounder)입니다. 어떤 비즈니스 환경에서도 유연하게 적응하며 즉각적인 매출 창출과 시스템 개선을 이끌어낼 수 있는 완벽한 파트너입니다.",
             'q2': "탁상공론에 머무는 기획을 넘어, 현장의 언어를 정확히 이해할 수 있다는 점입니다. 건설 현장 공무 실무와 중장비 자격(CNC, 굴착기 등) 취득 경험은 제조업 및 현장 기반 비즈니스 마케팅 시 실무진과 고객의 니즈를 가장 뾰족하게 파악하는 강력한 무기가 됩니다.",
