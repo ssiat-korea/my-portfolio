@@ -6,7 +6,7 @@
     <title>전상현 | 비즈니스 성장을 이끄는 통합 마케팅 & 전략 기획자</title>
     <style>
         /* 폰트 및 기본 설정 */
-        @import url('[https://webfontworld.github.io/score/SCoreDream.css](https://webfontworld.github.io/score/SCoreDream.css)');
+        @import url('https://webfontworld.github.io/score/SCoreDream.css');
 
         body { margin: 0; font-family: 'SCoreDream', sans-serif; color: #eee; line-height: 1.6; background-color: #000; overflow-x: hidden; }
         h1, h2, h3, h4 { margin: 0; }
@@ -37,7 +37,7 @@
         .hero-bg {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: url('[https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80](https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80)') center/cover no-repeat;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
             opacity: 0.2; 
             z-index: 0;
             transition: opacity 0.1s ease-out; 
@@ -153,7 +153,7 @@
         .suggestion-btn:hover, .suggestion-btn:active { background: #0f0; color: #000; }
         .suggestion-btn:disabled { opacity: 0.5; cursor: not-allowed; border-color: #555; color: #555; }
 
-        /* 🚨 문제의 해결 부분: 잘렸던 모달 스타일 정상적으로 복원! */
+        /* 모달 스타일 */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
         .modal-content { background: #111; width: 90%; max-width: 800px; max-height: 85vh; overflow-y: auto; border-radius: 15px; border: 1px solid #0f0; padding: 50px; position: relative; transform: translateY(20px); transition: transform 0.3s ease; box-shadow: 0 20px 50px rgba(0,255,0,0.1); }
         .modal-overlay.active { display: flex; opacity: 1; }
@@ -224,12 +224,6 @@
 </head>
 <body>
 
-    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <textarea name="message"></textarea>
-    </form>
-    
     <header class="hero">
         <div class="hero-bg" id="hero-bg"></div>
         
@@ -399,7 +393,6 @@
                 <button class="suggestion-btn" onclick="askQuestion('q1', '왜 전상현 기획자와 함께해야 하나요?')">왜 전상현 기획자와 함께해야 하나요?</button>
                 <button class="suggestion-btn" onclick="askQuestion('q2', '다양한 산업군을 거친 이력이 주는 장점은?')">다양한 산업군을 거친 이력이 주는 장점은?</button>
                 <button class="suggestion-btn" onclick="askQuestion('q3', '디자인/영상 외주 비용 0원은 어떻게 구현하나요?')">디자인/영상 외주 비용 0원은 어떻게 구현하나요?</button>
-                <button class="suggestion-btn" style="border-color: #ff5e00; color: #ff5e00;" onclick="showContactForm()">📬 1:1 다이렉트 문의하기</button>
             </div>
         </div>
     </section>
@@ -574,7 +567,7 @@
 
         // 유튜브 API 스크립트 동적 로드
         var tag = document.createElement('script');
-        tag.src = "[https://www.youtube.com/iframe_api](https://www.youtube.com/iframe_api)";
+        tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
@@ -722,59 +715,6 @@
                 chatBox.scrollTop = chatBox.scrollHeight;
                 btns.forEach(btn => btn.disabled = false);
             }, 1500);
-        }
-        
-        // 🚨 새로 추가된 1:1 폼 전송 기능! (레이아웃 보호 완료)
-        function showContactForm() {
-            const chatBox = document.getElementById('chat-box');
-            const typingIndicator = document.getElementById('typing-indicator');
-            const btns = document.querySelectorAll('.suggestion-btn');
-            
-            // 질문하는 동안 버튼 비활성화
-            btns.forEach(btn => btn.disabled = true);
-
-            // 사용자의 문의 클릭 메시지
-            const userMsg = document.createElement('div');
-            userMsg.className = 'msg user-msg';
-            userMsg.innerText = "📬 1:1 다이렉트 문의하기";
-            chatBox.insertBefore(userMsg, typingIndicator);
-
-            chatBox.scrollTop = chatBox.scrollHeight;
-            typingIndicator.style.display = 'block';
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            // 1초 뒤 AI 답변과 입력 폼 등장
-            setTimeout(() => {
-                typingIndicator.style.display = 'none';
-                const aiMsg = document.createElement('div');
-                aiMsg.className = 'msg ai-msg';
-                
-                // 🚨 넷플리파이 전송 폼 (스타일 캡슐화로 사이트 레이아웃 붕괴 완벽 차단)
-                aiMsg.innerHTML = `멋진 제안을 기대합니다! 아래 폼을 작성해 주시면 저에게 즉시 다이렉트로 전송됩니다.<br><br>
-                <div style="background: #111; padding: 20px; border-radius: 15px; border: 1px solid #0f0; margin-top: 10px;">
-                    <form name="contact" method="POST" data-netlify="true">
-                        <input type="hidden" name="form-name" value="contact">
-                        <div style="margin-bottom: 15px; text-align: left;">
-                            <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">성함 / 기업명</label>
-                            <input type="text" name="name" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit;">
-                        </div>
-                        <div style="margin-bottom: 15px; text-align: left;">
-                            <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">회신받을 이메일</label>
-                            <input type="email" name="email" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit;">
-                        </div>
-                        <div style="margin-bottom: 15px; text-align: left;">
-                            <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">문의 내용</label>
-                            <textarea name="message" rows="4" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit; resize: vertical;"></textarea>
-                        </div>
-                        <button type="submit" style="background: #0f0; color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.3s; font-family: inherit;">📬 전상현 기획자에게 메시지 보내기</button>
-                    </form>
-                </div>`;
-                
-                chatBox.insertBefore(aiMsg, typingIndicator);
-                chatBox.scrollTop = chatBox.scrollHeight;
-                
-                btns.forEach(btn => btn.disabled = false);
-            }, 1000);
         }
     </script>
 </body>
