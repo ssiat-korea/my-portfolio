@@ -275,14 +275,7 @@
 </head>
 <body>
 
-    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-        <input type="text" name="name" id="hidden-name" />
-        <input type="email" name="email" id="hidden-email" />
-        <textarea name="message" id="hidden-message"></textarea>
-        <button type="submit" id="hidden-submit">Submit</button>
-    </form>
-
-    <header class="hero">
+     <header class="hero">
         <div class="hero-bg" id="hero-bg"></div>
         
         <div class="hero-title">
@@ -827,7 +820,7 @@
             }, 1500);
         }
 
-        // 🚨 1:1 다이렉트 폼 띄우기 및 Netlify 연동 전송 로직
+       // 🚨 1:1 다이렉트 폼 띄우기 (Formspree용으로 수정됨)
         function showContactForm() {
             const chatBox = document.getElementById('chat-box');
             const typingIndicator = document.getElementById('typing-indicator');
@@ -849,7 +842,8 @@
                 const aiMsg = document.createElement('div');
                 aiMsg.className = 'msg ai-msg';
                 
-                aiMsg.innerHTML = `멋진 제안을 기대합니다! 아래 폼을 작성해 주시면 저에게 즉시 다이렉트로 전송됩니다.<br><br>
+                // Formspree로 바로 쏘기 위한 UI (onclick 함수 이름 변경)
+                aiMsg.innerHTML = `멋진 제안을 기대합니다! 아래 폼을 작성해 주시면 제 이메일로 즉시 알림이 옵니다.<br><br>
                 <div style="background: #111; padding: 20px; border-radius: 15px; border: 1px solid #0f0; margin-top: 10px;">
                     <div style="margin-bottom: 15px; text-align: left;">
                         <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">성함 / 기업명</label>
@@ -863,7 +857,7 @@
                         <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">문의 내용</label>
                         <textarea id="visible-message" rows="4" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit; resize: vertical;"></textarea>
                     </div>
-                    <button onclick="submitToNetlify()" style="background: #0f0; color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.3s; font-family: inherit;">📬 전상현 기획자에게 메시지 보내기</button>
+                    <button onclick="submitToFormspree()" style="background: #0f0; color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.3s; font-family: inherit;">📬 전상현 기획자에게 메시지 보내기</button>
                 </div>`;
                 
                 chatBox.insertBefore(aiMsg, typingIndicator);
@@ -873,7 +867,8 @@
             }, 1000);
         }
 
-        function submitToNetlify() {
+        // 🚨 Formspree 서버로 데이터를 직접 쏘는 완벽한 통신 로직
+        function submitToFormspree() {
             const name = document.getElementById('visible-name').value;
             const email = document.getElementById('visible-email').value;
             const message = document.getElementById('visible-message').value;
@@ -883,12 +878,35 @@
                 return;
             }
 
-            document.getElementById('hidden-name').value = name;
-            document.getElementById('hidden-email').value = email;
-            document.getElementById('hidden-message').value = message;
-            
-            document.getElementById('hidden-submit').click();
-            alert("성공적으로 전송되었습니다!"); // 전송 완료 안내
+            // 🚨 아래 주소를 발급받은 Formspree 주소로 반드시 변경하세요!
+            const endpoint = "https://formspree.io/f/xeepwloe";
+
+            fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    "이름": name,
+                    "답장받을 이메일": email,
+                    "문의내용": message
+                })
+            })
+            .then(response => {
+                if(response.ok) {
+                    alert("메시지가 성공적으로 전송되었습니다! 이메일을 확인해 볼게요.");
+                    // 전송 성공 시 입력창 깔끔하게 비워주기
+                    document.getElementById('visible-name').value = '';
+                    document.getElementById('visible-email').value = '';
+                    document.getElementById('visible-message').value = '';
+                } else {
+                    alert("앗, 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+                }
+            })
+            .catch(error => {
+                alert("네트워크 오류가 발생했습니다.");
+            });
         }
     </script>
 </body>
