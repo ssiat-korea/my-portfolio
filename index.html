@@ -64,6 +64,38 @@
         .section-title { text-align: center; font-size: 2.3rem; margin-bottom: 60px; color: #fff; font-weight: 800; }
         .section-subtitle { text-align: center; color: #0f0; font-weight: 500; margin-top: -50px; margin-bottom: 60px; font-size: 1.1rem; }
 
+        /* 🚨 숫자 카운터 및 네온 효과 스타일 */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; margin-bottom: 40px; }
+        .stat-item {
+            border: 2px solid #1a1f1a;
+            border-radius: 15px;
+            padding: 40px 20px;
+            background: linear-gradient(145deg, #111 0%, #050505 100%);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+            position: relative;
+        }
+        .stat-item.completed {
+            border-color: #0f0; /* 완료 시 스트로크 네온 효과 */
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
+        }
+        .stat-item h2 {
+            font-size: clamp(1.8rem, 2.5vw, 2.8rem); /* 반응형 폰트 크기 */
+            color: #0f0;
+            font-weight: 900;
+            margin-bottom: 10px;
+            white-space: nowrap; /* 줄바꿈 방지 */
+            letter-spacing: -1px;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.6s ease;
+        }
+        .stat-item.completed h2 {
+            transform: scale(1.4); /* 스케일 업 효과 */
+            text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        .stat-item p { font-size: 1rem; color: #aaa; font-weight: 500; }
+
         /* About Me */
         .about-me { display: flex; align-items: center; gap: 50px; background: linear-gradient(145deg, #1a1f1a 0%, #0d0f0d 100%); border: 1px solid #2a332a; border-radius: 20px; padding: 50px; margin-bottom: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .profile-img-container { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; }
@@ -188,6 +220,13 @@
             .section { padding: 60px 20px; }
             .section-title { font-size: 1.8rem; margin-bottom: 40px; }
             .section-subtitle { font-size: 0.95rem; margin-top: -30px; margin-bottom: 40px; word-break: keep-all; }
+            
+            /* 🚨 숫자 카운터 모바일 2x2 배열 및 사이즈 최적화 */
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 30px; }
+            .stat-item { padding: 20px 10px; }
+            .stat-item h2 { font-size: 1.5rem; margin-bottom: 5px; }
+            .stat-item p { font-size: 0.85rem; word-break: keep-all; }
+
             .about-me { flex-direction: column; padding: 30px 20px; gap: 30px; margin-bottom: 60px; text-align: center; }
             .profile-img-container img { max-width: 80%; }
             .about-me-text h3 { font-size: 1.4rem; }
@@ -224,6 +263,13 @@
 </head>
 <body>
 
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="name" id="hidden-name" />
+        <input type="email" name="email" id="hidden-email" />
+        <textarea name="message" id="hidden-message"></textarea>
+        <button type="submit" id="hidden-submit">Submit</button>
+    </form>
+
     <header class="hero">
         <div class="hero-bg" id="hero-bg"></div>
         
@@ -239,6 +285,27 @@
         </div>
         <p>전략가 전상현의 포트폴리오입니다</p>
     </header>
+
+    <section class="section reveal">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h2 id="cost-counter" class="counter" data-target="0">500,000,000</h2>
+                <p>마케팅/디자인 외주 비용 (원)</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="counter" data-target="1800">0</h2>
+                <p>유튜브 채널 구독자 수</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="counter" data-target="100">0</h2>
+                <p>로컬 매장 자동화 구축률 (%)</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="counter" data-target="20">0</h2>
+                <p>실전 비즈니스 경력 (년)</p>
+            </div>
+        </div>
+    </section>
 
     <section class="section reveal">
         <div class="about-me">
@@ -393,6 +460,7 @@
                 <button class="suggestion-btn" onclick="askQuestion('q1', '왜 전상현 기획자와 함께해야 하나요?')">왜 전상현 기획자와 함께해야 하나요?</button>
                 <button class="suggestion-btn" onclick="askQuestion('q2', '다양한 산업군을 거친 이력이 주는 장점은?')">다양한 산업군을 거친 이력이 주는 장점은?</button>
                 <button class="suggestion-btn" onclick="askQuestion('q3', '디자인/영상 외주 비용 0원은 어떻게 구현하나요?')">디자인/영상 외주 비용 0원은 어떻게 구현하나요?</button>
+                <button class="suggestion-btn" style="border-color: #ff5e00; color: #ff5e00;" onclick="showContactForm()">📬 1:1 다이렉트 문의하기</button>
             </div>
         </div>
     </section>
@@ -452,6 +520,7 @@
             document.getElementById(modalId).classList.remove('active'); document.body.style.overflow = 'auto';
         }
 
+        // 🚨 스크롤 감지 & 숫자 애니메이션 로직
         document.addEventListener("DOMContentLoaded", function() {
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
             const observer = new IntersectionObserver((entries, observer) => {
@@ -460,6 +529,11 @@
                         entry.target.classList.add('active');
                         const skillBars = entry.target.querySelectorAll('.skill-bar-fill');
                         skillBars.forEach(bar => { bar.style.width = bar.getAttribute('data-width'); });
+                        
+                        if(entry.target.querySelector('.counter')) {
+                            startCounters();
+                        }
+                        
                         observer.unobserve(entry.target); 
                     }
                 });
@@ -467,6 +541,51 @@
             const revealElements = document.querySelectorAll('.reveal');
             revealElements.forEach(el => observer.observe(el));
         });
+
+        // 🚨 숫자 카운팅 및 테두리 효과
+        let countersStarted = false; 
+        function startCounters() {
+            if (countersStarted) return;
+            countersStarted = true; 
+            
+            const counters = document.querySelectorAll('.counter');
+            const DURATION = 3000; 
+            const FRAME_RATE = 1000 / 60; 
+            const TOTAL_FRAMES = Math.round(DURATION / FRAME_RATE);
+
+            counters.forEach(counter => {
+                const isCostCounter = counter.id === 'cost-counter';
+                const target = +counter.getAttribute('data-target');
+                const startValue = isCostCounter ? 500000000 : 0; 
+                
+                let frame = 0;
+
+                const countInterval = setInterval(() => {
+                    frame++;
+                    const progress = 1 - Math.pow(1 - (frame / TOTAL_FRAMES), 3);
+                    
+                    let currentCount;
+                    if (isCostCounter) {
+                        currentCount = Math.round(startValue - (startValue * progress));
+                        if (currentCount < target) currentCount = target; 
+                    } else {
+                        currentCount = Math.round(target * progress);
+                    }
+                    
+                    if (frame <= TOTAL_FRAMES) {
+                        counter.innerText = currentCount.toLocaleString();
+                    } else {
+                        if (isCostCounter) {
+                            counter.innerText = target;
+                        } else {
+                            counter.innerText = target.toLocaleString() + (target > 1000 ? '+' : '');
+                        }
+                        counter.closest('.stat-item').classList.add('completed');
+                        clearInterval(countInterval);
+                    }
+                }, FRAME_RATE);
+            });
+        }
 
         // PC 드래그 가로 스크롤 로직
         const slider = document.querySelector('.career-path');
@@ -513,23 +632,23 @@
         });
 
         /* =========================================
-           유튜브 API 및 순차 재생 로직 (7초 타이머)
+           🚨 유튜브 API 및 7초 순차 재생 로직
         ========================================= */
         const playlist = [
             {
-                videoId: "8X2gB-7iORM", // video1
+                videoId: "8X2gB-7iORM", // 유튜브 링크 1
                 tag: "Part 1: Digital Craft",
                 title: "비주얼 & 미디어 툴링",
                 desc: "포토샵, 일러스트부터 영상 편집과 최신 AI 툴까지, 막힘없는 실무 감각으로 결과물을 도출합니다."
             },
             {
-                videoId: "XRXtXTko50Y", // video2
+                videoId: "XRXtXTko50Y", // 유튜브 링크 2
                 tag: "Part 2: Human-Centered",
                 title: "사람을 향한 인사이트",
                 desc: "상담심리학적 이해를 바탕으로 사람의 마음을 읽고, 타겟에 깊이 공감하는 기획을 전개합니다."
             },
             {
-                videoId: "H3gLDVPmpak", // video3
+                videoId: "H3gLDVPmpak", // 유튜브 링크 3
                 tag: "Part 3: Synergy",
                 title: "경계를 넘는 올라운더",
                 desc: "기획, 디자인, 현장 운영 전반을 유기적으로 연결하여 비즈니스의 시너지를 이끌어냅니다."
@@ -550,7 +669,6 @@
         const descElement = document.getElementById('sub-desc');
         const playerContainer = document.getElementById('yt-player-container');
 
-        // 프로그레스 바 UI 생성
         function initProgressBars() {
             progressContainer.innerHTML = '';
             progressFills = [];
@@ -565,13 +683,11 @@
             });
         }
 
-        // 유튜브 API 스크립트 동적 로드
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        // API가 준비되면 호출되는 함수
         function onYouTubeIframeAPIReady() {
             initProgressBars();
             
@@ -580,14 +696,7 @@
                 width: '100%',
                 videoId: playlist[0].videoId,
                 playerVars: {
-                    'autoplay': 1, // 자동 재생
-                    'mute': 1, // 크롬 정책상 자동재생은 음소거 필수
-                    'controls': 0, // 컨트롤러 숨김
-                    'showinfo': 0,
-                    'modestbranding': 1, // 유튜브 로고 최소화
-                    'rel': 0, // 관련 동영상 숨김
-                    'disablekb': 1, // 키보드 조작 방지
-                    'playsinline': 1 // 모바일 전체화면 방지
+                    'autoplay': 1, 'mute': 1, 'controls': 0, 'showinfo': 0, 'modestbranding': 1, 'rel': 0, 'disablekb': 1, 'playsinline': 1, 'origin': window.location.origin
                 },
                 events: {
                     'onReady': onPlayerReady,
@@ -596,28 +705,23 @@
             });
         }
 
-        // 🚨 이 부분이 핵심! 브라우저 정책을 뚫고 무조건 음소거로 재생하게 만듭니다.
         function onPlayerReady(event) {
+            updateUIText(currentIndex); 
             event.target.mute(); 
             event.target.playVideo();
         }
 
-        // 재생 상태가 변할 때마다 호출
         function onPlayerStateChange(event) {
-            // 영상이 재생 중(PLAYING)일 때
             if (event.data == YT.PlayerState.PLAYING) {
-                // 텍스트 교체 및 페이드 인
                 updateUIText(currentIndex);
                 playerContainer.style.opacity = 1;
                 
-                // 시간 측정 시작
                 playStartTime = Date.now();
                 manageProgressBar(currentIndex);
                 checkVideoTime();
             }
         }
 
-        // 텍스트 내용 및 투명도 전환 효과
         function updateUIText(index) {
             const data = playlist[index];
             tagElement.style.opacity = 0;
@@ -632,15 +736,13 @@
                 tagElement.style.opacity = 1;
                 titleElement.style.opacity = 1;
                 descElement.style.opacity = 1;
-            }, 400); // 0.4초 대기 후 변경하여 부드럽게
+            }, 400); 
         }
 
-        // 7초 도달 시 다음 영상으로
         function playNextVideo() {
             clearInterval(timeCheckInterval);
             clearInterval(progressInterval);
             
-            // 화면 부드럽게 페이드 아웃 (암전)
             playerContainer.style.opacity = 0;
             
             setTimeout(() => {
@@ -648,13 +750,10 @@
                 if (currentIndex >= playlist.length) {
                     currentIndex = 0;
                 }
-                // 다음 유튜브 영상 ID 로드 및 재생
                 ytPlayer.loadVideoById(playlist[currentIndex].videoId);
-                // 로드 완료 후 onPlayerStateChange가 PLAYING을 감지하여 다시 화면을 켬
-            }, 800); // 페이드 아웃 대기 시간
+            }, 800); 
         }
 
-        // 하단 프로그레스 바 퍼센트 채우기
         function manageProgressBar(index) {
             clearInterval(progressInterval);
             progressFills.forEach((fill, i) => {
@@ -670,7 +769,6 @@
             }, 50);
         }
 
-        // 정확히 7초가 지났는지 체크하는 타이머
         function checkVideoTime() {
             clearInterval(timeCheckInterval);
             timeCheckInterval = setInterval(() => {
@@ -682,7 +780,7 @@
         }
 
         /* =========================================
-           AI 챗봇 로직
+           AI 챗봇 로직 & 1:1 폼 전송
         ========================================= */
         const answers = {
             'q1': "전상현 기획자는 지난 20여 년간 통신, 커머스, 건설, 미디어는 물론 <b>해외 리테일과 로컬 F&B 창업</b>까지 다양한 산업을 거치며 'B2B/B2C 세일즈 내공'과 '실무 기술력'을 동시에 축적한 올라운더(All-rounder)입니다. 어떤 비즈니스 환경에서도 유연하게 적응하며 즉각적인 매출 창출과 시스템 개선을 이끌어낼 수 있는 완벽한 파트너입니다.",
@@ -715,6 +813,70 @@
                 chatBox.scrollTop = chatBox.scrollHeight;
                 btns.forEach(btn => btn.disabled = false);
             }, 1500);
+        }
+
+        // 🚨 1:1 다이렉트 폼 띄우기 및 Netlify 연동 전송 로직
+        function showContactForm() {
+            const chatBox = document.getElementById('chat-box');
+            const typingIndicator = document.getElementById('typing-indicator');
+            const btns = document.querySelectorAll('.suggestion-btn');
+            
+            btns.forEach(btn => btn.disabled = true);
+
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user-msg';
+            userMsg.innerText = "📬 1:1 다이렉트 문의하기";
+            chatBox.insertBefore(userMsg, typingIndicator);
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+            typingIndicator.style.display = 'block';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                typingIndicator.style.display = 'none';
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'msg ai-msg';
+                
+                aiMsg.innerHTML = `멋진 제안을 기대합니다! 아래 폼을 작성해 주시면 저에게 즉시 다이렉트로 전송됩니다.<br><br>
+                <div style="background: #111; padding: 20px; border-radius: 15px; border: 1px solid #0f0; margin-top: 10px;">
+                    <div style="margin-bottom: 15px; text-align: left;">
+                        <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">성함 / 기업명</label>
+                        <input type="text" id="visible-name" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit;">
+                    </div>
+                    <div style="margin-bottom: 15px; text-align: left;">
+                        <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">회신받을 이메일</label>
+                        <input type="email" id="visible-email" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit;">
+                    </div>
+                    <div style="margin-bottom: 15px; text-align: left;">
+                        <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">문의 내용</label>
+                        <textarea id="visible-message" rows="4" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit; resize: vertical;"></textarea>
+                    </div>
+                    <button onclick="submitToNetlify()" style="background: #0f0; color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.3s; font-family: inherit;">📬 전상현 기획자에게 메시지 보내기</button>
+                </div>`;
+                
+                chatBox.insertBefore(aiMsg, typingIndicator);
+                chatBox.scrollTop = chatBox.scrollHeight;
+                
+                btns.forEach(btn => btn.disabled = false);
+            }, 1000);
+        }
+
+        function submitToNetlify() {
+            const name = document.getElementById('visible-name').value;
+            const email = document.getElementById('visible-email').value;
+            const message = document.getElementById('visible-message').value;
+
+            if(!name || !email || !message) {
+                alert("모든 항목을 입력해 주세요!");
+                return;
+            }
+
+            document.getElementById('hidden-name').value = name;
+            document.getElementById('hidden-email').value = email;
+            document.getElementById('hidden-message').value = message;
+            
+            document.getElementById('hidden-submit').click();
+            alert("성공적으로 전송되었습니다!"); // 전송 완료 안내
         }
     </script>
 </body>
