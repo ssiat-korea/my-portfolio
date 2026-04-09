@@ -556,7 +556,7 @@
             counters.forEach(counter => {
                 const isCostCounter = counter.id === 'cost-counter';
                 const target = +counter.getAttribute('data-target');
-                const startValue = isCostCounter ? 500000000 : 0; 
+                const startValue = isCostCounter ? 99999999 : 0; 
                 
                 let frame = 0;
 
