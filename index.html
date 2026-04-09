@@ -298,8 +298,8 @@
                 <p>마케팅/디자인 외주 비용 (원)</p>
             </div>
             <div class="stat-item">
-                <h2 class="counter" data-target="1800">0</h2>
-                <p>유튜브 채널 구독자 수</p>
+                <h2 class="counter" data-target="8500" data-suffix="K+">0</h2>
+                <p>총 확보 SNS 팔로워 (유튜브/틱톡/FB)</p>
             </div>
             <div class="stat-item">
                 <h2 class="counter" data-target="100">0</h2>
@@ -547,7 +547,7 @@
             revealElements.forEach(el => observer.observe(el));
         });
 
-        // 🚨 숫자 카운팅 및 테두리 효과
+       // 🚨 3초 숫자 카운터 로직 (K 단위 동적 변환 기능 추가)
         let countersStarted = false; 
         function startCounters() {
             if (countersStarted) return;
@@ -561,7 +561,8 @@
             counters.forEach(counter => {
                 const isCostCounter = counter.id === 'cost-counter';
                 const target = +counter.getAttribute('data-target');
-                const startValue = isCostCounter ? 99999999 : 0; 
+                const suffix = counter.getAttribute('data-suffix') || ''; // K+ 등 접미사 가져오기
+                const startValue = isCostCounter ? 500000000 : 0; 
                 
                 let frame = 0;
 
@@ -577,13 +578,20 @@
                         currentCount = Math.round(target * progress);
                     }
                     
+                    // 🚨 K 단위 변환 로직 (1000 이상일 때 소수점 첫째 자리 K로 표시)
+                    let displayValue = currentCount.toLocaleString();
+                    if (suffix === 'K+' && currentCount >= 100) {
+                        displayValue = (currentCount / 1000).toFixed(1) + 'K';
+                    }
+
                     if (frame <= TOTAL_FRAMES) {
-                        counter.innerText = currentCount.toLocaleString();
+                        counter.innerText = displayValue;
                     } else {
+                        // 최종 도달 시 텍스트 고정
                         if (isCostCounter) {
                             counter.innerText = target;
                         } else {
-                            counter.innerText = target.toLocaleString() + (target > 1000 ? '+' : '');
+                            counter.innerText = suffix === 'K+' ? (target / 1000).toFixed(1) + suffix : target.toLocaleString() + (target > 1000 ? '+' : '');
                         }
                         counter.closest('.stat-item').classList.add('completed');
                         clearInterval(countInterval);
@@ -591,7 +599,6 @@
                 }, FRAME_RATE);
             });
         }
-
         // PC 드래그 가로 스크롤 로직
         const slider = document.querySelector('.career-path');
         let isDown = false;
