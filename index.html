@@ -223,7 +223,12 @@
     </style>
 </head>
 <body>
-
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <textarea name="message"></textarea>
+    </form>
+    
     <header class="hero">
         <div class="hero-bg" id="hero-bg"></div>
         
@@ -393,6 +398,7 @@
                 <button class="suggestion-btn" onclick="askQuestion('q1', '왜 전상현 기획자와 함께해야 하나요?')">왜 전상현 기획자와 함께해야 하나요?</button>
                 <button class="suggestion-btn" onclick="askQuestion('q2', '다양한 산업군을 거친 이력이 주는 장점은?')">다양한 산업군을 거친 이력이 주는 장점은?</button>
                 <button class="suggestion-btn" onclick="askQuestion('q3', '디자인/영상 외주 비용 0원은 어떻게 구현하나요?')">디자인/영상 외주 비용 0원은 어떻게 구현하나요?</button>
+                <button class="suggestion-btn" style="border-color: #ff5e00; color: #ff5e00;" onclick="showContactForm()">📬 1:1 다이렉트 문의하기</button>
             </div>
         </div>
     </section>
@@ -715,6 +721,59 @@
                 chatBox.scrollTop = chatBox.scrollHeight;
                 btns.forEach(btn => btn.disabled = false);
             }, 1500);
+        }
+        
+```javascript
+        function showContactForm() {
+            const chatBox = document.getElementById('chat-box');
+            const typingIndicator = document.getElementById('typing-indicator');
+            const btns = document.querySelectorAll('.suggestion-btn');
+            
+            // 질문하는 동안 버튼 비활성화
+            btns.forEach(btn => btn.disabled = true);
+
+            // 사용자의 문의 클릭 메시지
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user-msg';
+            userMsg.innerText = "📬 1:1 다이렉트 문의하기";
+            chatBox.insertBefore(userMsg, typingIndicator);
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+            typingIndicator.style.display = 'block';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // 1초 뒤 AI 답변과 입력 폼 등장
+            setTimeout(() => {
+                typingIndicator.style.display = 'none';
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'msg ai-msg';
+                
+                // 🚨 넷플리파이 전송 폼 (스타일 캡슐화로 사이트 레이아웃 붕괴 완벽 차단)
+                aiMsg.innerHTML = `멋진 제안을 기대합니다! 아래 폼을 작성해 주시면 저에게 즉시 다이렉트로 전송됩니다.<br><br>
+                <div style="background: #111; padding: 20px; border-radius: 15px; border: 1px solid #0f0; margin-top: 10px;">
+                    <form name="contact" method="POST" data-netlify="true">
+                        <input type="hidden" name="form-name" value="contact">
+                        <div style="margin-bottom: 15px; text-align: left;">
+                            <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">성함 / 기업명</label>
+                            <input type="text" name="name" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit;">
+                        </div>
+                        <div style="margin-bottom: 15px; text-align: left;">
+                            <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">회신받을 이메일</label>
+                            <input type="email" name="email" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit;">
+                        </div>
+                        <div style="margin-bottom: 15px; text-align: left;">
+                            <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">문의 내용</label>
+                            <textarea name="message" rows="4" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit; resize: vertical;"></textarea>
+                        </div>
+                        <button type="submit" style="background: #0f0; color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.3s; font-family: inherit;">📬 전상현 기획자에게 메시지 보내기</button>
+                    </form>
+                </div>`;
+                
+                chatBox.insertBefore(aiMsg, typingIndicator);
+                chatBox.scrollTop = chatBox.scrollHeight;
+                
+                btns.forEach(btn => btn.disabled = false);
+            }, 1000);
         }
     </script>
 </body>
