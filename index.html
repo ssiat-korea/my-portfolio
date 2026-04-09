@@ -66,6 +66,7 @@
 
         /* 🚨 숫자 카운터 및 네온 효과 스타일 */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; margin-bottom: 40px; }
+        /* 🚨 폰트 변형/깨짐 방지 하드웨어 가속 추가 */
         .stat-item {
             border: 2px solid #1a1f1a;
             border-radius: 15px;
@@ -74,6 +75,8 @@
             transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
             box-shadow: 0 5px 15px rgba(0,0,0,0.8);
             position: relative;
+            -webkit-font-smoothing: antialiased; /* 폰트 렌더링 부드럽게 */
+            transform: translateZ(0); /* 모바일 애니메이션 시 폰트 일그러짐 완벽 방지 */
         }
         .stat-item.completed {
             border-color: #0f0; /* 완료 시 스트로크 네온 효과 */
@@ -237,7 +240,8 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 30px; }
             .stat-item { padding: 20px 10px; }
             .stat-item h2 { font-size: 1.5rem; margin-bottom: 5px; }
-            .stat-item p { font-size: 0.85rem; word-break: keep-all; }
+           /* 🚨 모바일 환경 폰트 크기 및 줄간격 최적화 */
+            .stat-item p { font-size: 0.8rem; word-break: keep-all; line-height: 1.4; letter-spacing: -0.5px; }
 
             .about-me { flex-direction: column; padding: 30px 20px; gap: 30px; margin-bottom: 60px; text-align: center; }
             .profile-img-container img { max-width: 80%; }
@@ -292,23 +296,24 @@
     </header>
 
     <section class="section reveal">
-        <div class="stats-grid">
+      <div class="stats-grid">
             <div class="stat-item">
                 <h2 id="cost-counter" class="counter" data-target="0">500,000,000</h2>
-                <p>마케팅/디자인 외주 비용 (원)</p>
+                <p>마케팅/디자인 외주 비용<br><span style="font-size: 0.85em; opacity: 0.7;">(원)</span></p>
             </div>
             <div class="stat-item">
                 <h2 class="counter" data-target="8500" data-suffix="K+">0</h2>
-                <p>총 확보 SNS 팔로워 (유튜브/틱톡/FB)</p>
+                <p>총 확보 SNS 팔로워<br><span style="font-size: 0.85em; opacity: 0.7;">(유튜브/틱톡/FB)</span></p>
             </div>
             <div class="stat-item">
                 <h2 class="counter" data-target="100">0</h2>
-                <p>로컬 매장 자동화 구축률 (%)</p>
+                <p>로컬 매장 자동화 구축률<br><span style="font-size: 0.85em; opacity: 0.7;">(%)</span></p>
             </div>
             <div class="stat-item">
                 <h2 class="counter" data-target="20">0</h2>
-                <p>실전 비즈니스 경력 (년)</p>
+                <p>실전 비즈니스 경력<br><span style="font-size: 0.85em; opacity: 0.7;">(년)</span></p>
             </div>
+        </div>
         </div>
     </section>
 
