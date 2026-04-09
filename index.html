@@ -122,7 +122,19 @@
         .card:hover::after, .card:active::after { opacity: 1; }
         .card h3 { font-size: 1.5rem; margin-bottom: 20px; color: #fff; font-weight: 700; display: flex; align-items: center; gap: 10px; }
         .card p { font-size: 1.05rem; color: #d8d8d8; font-weight: 300; word-break: keep-all; line-height: 1.8; flex-grow: 1; }
-        .card strong { color: #0f0; font-weight: 600; display: inline-block; margin-top: 25px; padding: 10px 18px; background-color: rgba(0, 255, 0, 0.08); border-radius: 8px; font-size: 0.95rem; align-self: flex-start; }
+       .card strong { 
+            color: #0f0; 
+            font-weight: 600; 
+            display: inline-block; 
+            margin-top: 25px; 
+            padding: 10px 15px; /* 좌우 여백 살짝 축소 */
+            background-color: rgba(0, 255, 0, 0.08); 
+            border-radius: 8px; 
+            font-size: 0.9rem; /* 기존 0.95rem에서 미세 축소 */
+            align-self: flex-start; 
+            white-space: nowrap; /* 강제 줄바꿈 방지 (핵심) */
+            letter-spacing: -0.5px; /* 자간을 좁혀서 한 줄에 쏙 들어가게 */
+        }
 
         /* 가로 스와이프 커리어 패스 */
         .swipe-hint { text-align: right; color: #0f0; font-size: 0.9rem; margin-bottom: 15px; font-weight: 500; opacity: 0.8; animation: pulseHint 2s infinite ease-in-out; pointer-events: none; }
