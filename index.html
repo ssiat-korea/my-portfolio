@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>전상현 | 비즈니스 성장을 이끄는 통합 마케팅 & 전략 기획자</title>
     <style>
-        /* 폰트 및 기본 설정 */
+        /* [기본 설정] 폰트 및 공통 CSS */
         @import url('https://webfontworld.github.io/score/SCoreDream.css');
 
         body { margin: 0; font-family: 'SCoreDream', sans-serif; color: #eee; line-height: 1.6; background-color: #000; overflow-x: hidden; }
@@ -31,7 +31,7 @@
         @keyframes popUpPower { from { opacity: 0; transform: translateY(40px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes profileFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 메인 헤더 */
+        /* [Hero] */
         .hero { position: relative; background-color: #000; color: white; padding: 180px 20px; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 55vh; }
         .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat; opacity: 0.2; z-index: 0; transition: opacity 0.1s ease-out; }
         .hero-bg::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent 40%, #000 100%); }
@@ -47,17 +47,17 @@
         .word-power { font-size: 4.2rem; font-weight: 900; color: #0f0; letter-spacing: -2px; opacity: 0; animation: popUpPower 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1) 2.2s forwards; }
         .hero p { font-size: 1.3rem; opacity: 0; font-weight: 300; letter-spacing: 1px; margin-top: 20px; animation: popUpPower 1s ease 2.6s forwards; color: rgba(255,255,255,0.7); }
 
-        /* 섹션 공통 */
+        /* [Section Common] */
         .section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
         .section-title { text-align: center; font-size: 2.3rem; margin-bottom: 60px; color: #fff; font-weight: 800; }
         .section-subtitle { text-align: center; color: #0f0; font-weight: 500; margin-top: -50px; margin-bottom: 60px; font-size: 1.1rem; }
 
-        /* By the Numbers (NEW) */
+        /* [By the Numbers] - 3s Counter */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; margin-bottom: 40px; }
         .stat-item h2 { font-size: 3.5rem; color: #0f0; font-weight: 900; margin-bottom: 10px; }
         .stat-item p { font-size: 1rem; color: #aaa; font-weight: 500; }
 
-        /* Visual Archive (NEW) */
+        /* [Visual Archive] - Gallery Slider */
         .archive-slider { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 30px; scrollbar-width: thin; scrollbar-color: #333 transparent; }
         .archive-card { flex: 0 0 350px; height: 250px; scroll-snap-align: start; border-radius: 15px; overflow: hidden; background: #111; border: 1px solid #2a332a; position: relative; cursor: pointer; transition: transform 0.3s ease; }
         .archive-card:hover { transform: scale(1.03); border-color: #0f0; }
@@ -65,31 +65,39 @@
         .archive-card:hover img { opacity: 0.9; }
         .archive-card .label { position: absolute; bottom: 20px; left: 20px; color: #fff; font-weight: 700; font-size: 1.1rem; text-shadow: 0 2px 10px #000; }
 
-        /* Philosophy Line (NEW) */
+        /* [Philosophy Line] */
         .philosophy-section { background: linear-gradient(to right, #000, #0a110a, #000); padding: 120px 20px; text-align: center; }
         .philosophy-section blockquote { font-size: 2.2rem; font-weight: 300; font-style: italic; color: #fff; margin: 0; word-break: keep-all; }
         .philosophy-section blockquote strong { color: #0f0; font-weight: 800; font-style: normal; }
 
-        /* About Me & Card Styling */
+        /* [About Me] - 원복 완료 */
         .about-me { display: flex; align-items: center; gap: 50px; background: linear-gradient(145deg, #1a1f1a 0%, #0d0f0d 100%); border: 1px solid #2a332a; border-radius: 20px; padding: 50px; margin-bottom: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .profile-img-container img { max-width: 100%; height: auto; border-radius: 15px; animation: profileFadeIn 1s ease 0.5s forwards; opacity: 0; mask-image: linear-gradient(to bottom, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%); }
         .about-me-text { flex: 1.5; }
+        .resume-download { margin-bottom: 30px; }
         .skills-container { margin-top: 10px; }
-        .skill-item { margin-bottom: 15px; }
         .skill-bar-bg { width: 100%; background-color: #222; border-radius: 10px; height: 8px; overflow: hidden; border: 1px solid #333;}
-        .skill-bar-fill { height: 100%; background: linear-gradient(90deg, #ff5e00, #0f0); border-radius: 10px; width: 0; transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        
+        /* 🚨 [Skill Bar Design] 그라데이션 및 둥근 모서리 원복 */
+        .skill-bar-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #ff5e00, #0f0); 
+            border-radius: 10px; 
+            width: 0; 
+            transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
+        }
 
+        /* [Core Strengths & Career Path] - 원복 완료 */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
         .card { background: linear-gradient(145deg, #1a1f1a 0%, #0d0f0d 100%); padding: 40px; border-radius: 15px; transition: all 0.4s ease; border: 1px solid #2a332a; cursor: pointer; position: relative; overflow: hidden; display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-12px); box-shadow: 0 15px 40px rgba(0, 255, 0, 0.15); border-color: #0f0; }
         .card h3 { font-size: 1.5rem; margin-bottom: 20px; color: #fff; font-weight: 700; display: flex; align-items: center; gap: 10px; }
         .card strong { color: #0f0; font-weight: 600; display: inline-block; margin-top: 25px; padding: 10px 18px; background-color: rgba(0, 255, 0, 0.08); border-radius: 8px; font-size: 0.95rem; align-self: flex-start; }
 
-        /* Career Path Horizontal */
         .career-path { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 20px; -webkit-overflow-scrolling: touch; }
         .career-box { flex: 0 0 calc(33.333% - 14px); scroll-snap-align: start; background: linear-gradient(145deg, #1a1f1a 0%, #0d0f0d 100%); border-radius: 15px; padding: 40px; border: 1px solid #2a332a; border-left: 5px solid #0f0; }
 
-        /* YouTube Background Section */
+        /* [YouTube Video Section] - 7s Loop */
         .video-hero { position: relative; width: 100%; height: 75vh; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 20px; border: 1px solid #2a332a; background-color: #000; margin-bottom: 60px; }
         #yt-player-container { position: absolute; top: 50%; left: 50%; width: 150vw; height: 150vh; transform: translate(-50%, -50%); z-index: 1; pointer-events: none; filter: brightness(0.5) contrast(1.1); opacity: 1; transition: opacity 0.8s ease-in-out; }
         .overlay-content { position: relative; z-index: 2; text-align: center; max-width: 900px; padding: 0 20px; }
@@ -98,11 +106,21 @@
         .progress-bar { width: 80px; height: 4px; background: rgba(255, 255, 255, 0.2); border-radius: 2px; overflow: hidden; }
         .progress-fill { height: 100%; background: #0f0; width: 0%; }
 
-        /* AI Chat & Contact Form Integration (NEW) */
+        /* [AI Chat & Contact Form Integration] - 원복 완료 */
         .ai-chat-container { max-width: 800px; margin: 0 auto; background: #0a0c0a; border: 1px solid #2a332a; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+        .chat-header { background: #111511; padding: 20px; border-bottom: 1px solid #2a332a; display: flex; align-items: center; gap: 10px; }
         .chat-box { padding: 30px; height: 450px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; scroll-behavior: smooth; }
-        .msg { max-width: 85%; padding: 15px 20px; border-radius: 20px; font-size: 1rem; word-break: keep-all; animation: profileFadeIn 0.3s ease; }
-        .ai-msg { background: #1a221a; align-self: flex-start; border-bottom-left-radius: 5px; border: 1px solid #2a332a; }
+        
+        /* 🚨 [AI Chat Message Style] 깨짐 해결 */
+        .msg { 
+            max-width: 85%; 
+            padding: 15px 20px; 
+            border-radius: 20px; 
+            font-size: 1rem; 
+            word-break: keep-all; 
+            animation: profileFadeIn 0.3s ease; 
+        }
+        .ai-msg { background: #1a221a; align-self: flex-start; border-bottom-left-radius: 5px; border: 1px solid #2a332a; color: #eee; }
         .user-msg { background: #0f0; color: #000; font-weight: 600; align-self: flex-end; border-bottom-right-radius: 5px; }
         
         /* Direct Contact Form inside Chat */
@@ -113,13 +131,16 @@
         .submit-btn { background: #0f0; color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.3s; }
         .submit-btn:hover { background: #0c9; }
 
-        /* Footer */
+        /* [Footer] - 원복 완료 */
         footer { background: #080808; text-align: center; padding: 80px 20px; border-top: 1px solid #111; }
         .contact-info { font-size: 1.2rem; margin-bottom: 20px; font-weight: 500; color: #fff; }
 
-        /* Mobile Optimization */
+        /* [Modal & Mobile] - 원복 완료 */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+        .modal-content { background: #111; width: 90%; max-width: 800px; max-height: 85vh; overflow-y: auto; border-radius: 15px; border: 1px solid #0f0; padding: 50px; position: relative; transform: translateY(20px); transition: transform 0.3s ease; box-shadow: 0 20px 50px rgba(0,255,0,0.1); }
+        .modal-overlay.active { display: flex; opacity: 1; }
+
         @media screen and (max-width: 768px) {
-            .hero { padding: 120px 20px 80px; }
             .top-line { font-size: 1.8rem; }
             .word-power { font-size: 2.8rem; }
             .about-me { flex-direction: column; padding: 30px 20px; }
@@ -180,7 +201,7 @@
             </div>
             <div class="about-me-text">
                 <h3>비즈니스의 본질을 꿰뚫는 전략가</h3>
-                <p>지난 20여 년간 통신, 무역, 커머스 등 대한민국 산업의 최전선에서 전략 기획과 마케팅을 주도해 온 실전형 전문가입니다. 상담복지학 전공을 통해 사람의 마음을 읽는 포용적 리더십을 갖추었으며, 데이터와 실무를 유기적으로 연결하여 압도적인 결과물을 도출합니다.</p>
+                <p>지난 20여 년간 통신, 무역, 커머스 등 대한민국 산업의 최전선에서 전략 기획과 마케팅을 주도해 온 실전형 전문가입니다. 단순히 기획에 머물지 않고 데이터 기반 유통 시뮬레이션, 대규모 상권 관리 등 실질적인 결과를 만들어왔습니다. 현재 상담복지학을 전공하며 타인을 이해하는 포용적 리더십을 갖추었으며, 다양한 산업군의 생태계를 누구보다 깊이 이해하고 있습니다.</p>
                 <div class="resume-download">
                     <a href="resume.pdf" target="_blank" class="download-btn">📥 상세 경력기술서 다운로드 (PDF)</a>
                 </div>
@@ -193,6 +214,14 @@
                         <div class="skill-info"><span>디지털 전환 & 콘텐츠 제작 (영상/AI 툴)</span><span>90%</span></div>
                         <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90%"></div></div>
                     </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>현장 공정 이해도 (CNC/지게차/굴착기 실무)</span><span>85%</span></div>
+                        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85%"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info"><span>B2B 세일즈 & 비즈니스 커뮤니케이션</span><span>95%</span></div>
+                        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="95%"></div></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -203,19 +232,19 @@
         <p class="section-subtitle">기획부터 디자인까지, 직접 완성한 실무 프로젝트 결과물</p>
         <div class="archive-slider">
             <div class="archive-card">
-                <img src="work1.jpg" alt="디자인 작업물 1">
+                <img src="work1.jpg" alt="브랜드 아이덴티티 기획">
                 <div class="label">브랜드 아이덴티티 기획</div>
             </div>
             <div class="archive-card">
-                <img src="work2.jpg" alt="디자인 작업물 2">
+                <img src="work2.jpg" alt="유통 패키지 디자인">
                 <div class="label">유통 패키지 디자인</div>
             </div>
             <div class="archive-card">
-                <img src="work3.jpg" alt="디자인 작업물 3">
+                <img src="work3.jpg" alt="홍보 포스터 & 판촉물">
                 <div class="label">홍보 포스터 & 판촉물</div>
             </div>
             <div class="archive-card">
-                <img src="work4.jpg" alt="디자인 작업물 4">
+                <img src="work4.jpg" alt="홈페이지 & UI 기획">
                 <div class="label">홈페이지 & UI 기획</div>
             </div>
         </div>
@@ -233,39 +262,71 @@
         <div class="grid">
             <div class="card" onclick="openModal('modal1')">
                 <h3>📊 통신/유통 전략 기획</h3>
-                <p>KTF/KT M&S 등에서 데이터 기반 유통 시뮬레이션과 대규모 상권 관리를 주도했습니다.</p>
-                <strong>Focus. 대규모 유통망 총괄</strong>
+                <p>대형 통신사(KTF/KT M&S) 및 알뜰폰 시장에서 데이터 기반의 유통 시뮬레이션과 대규모 상권 관리를 주도했습니다.</p>
+                <strong>Focus. 대규모 유통망 총괄 및 기획</strong>
+            </div>
+            <div class="card" onclick="openModal('modal2')">
+                <h3>🏢 경영 총괄 및 비딩</h3>
+                <p>온라인 커머스 기업의 운영/디자인 총괄 이사로 재직하며 전사 시스템 구축 및 글로벌 무역 비딩을 이끌었습니다.</p>
+                <strong>Focus. 브랜드 가치 제고 및 신규 매출 창출</strong>
             </div>
             <div class="card" onclick="openModal('modal3')">
                 <h3>🎨 마케팅 인프라 내재화</h3>
-                <p>디자인과 영상을 직접 생산하여 외부 외주 비용을 0원으로 만드는 시스템을 구축합니다.</p>
-                <strong>Focus. 디자인·영상 자체 생산</strong>
+                <p>포토샵, 일러스트를 활용한 수준 높은 시각화 능력으로, 외부 외주 비용을 0원으로 만드는 직접 제작 시스템을 구축합니다.</p>
+                <strong>Focus. 디자인·영상 자체 생산 시스템</strong>
+            </div>
+            <div class="card" onclick="openModal('modal4')">
+                <h3>⚙️ 현장 밀착형 기술력</h3>
+                <p>단순한 탁상공론이 아닌, CNC 밀링, 굴착기, 지게차 자격을 직접 취득하여 제조/건설 현장의 언어를 완벽히 이해합니다.</p>
+                <strong>Focus. 제조/물류 공정의 구조적 이해</strong>
+            </div>
+            <div class="card" onclick="openModal('modal5')">
+                <h3>🚀 디지털 전환 (DX) 리딩</h3>
+                <p>낙후된 채널(홈페이지, IT 시스템)의 리뉴얼부터 최신 AI 툴을 활용한 콘텐츠 기획까지 디지털 전환을 주도합니다.</p>
+                <strong>Focus. IT 인프라 최적화 및 숏폼 기획</strong>
             </div>
             <div class="card" onclick="openModal('modal6')">
                 <h3>🤝 심리 기반 커뮤니케이션</h3>
-                <p>상담복지학 지식을 바탕으로 조직 갈등을 관리하고 고객 심리를 날카롭게 분석합니다.</p>
-                <strong>Focus. 공감과 소통의 네트워크</strong>
+                <p>상담복지학 전공 지식을 바탕으로 조직 내 갈등을 유연하게 관리하고 고객의 심리를 날카롭게 분석합니다.</p>
+                <strong>Focus. 공감과 소통의 휴먼 네트워크</strong>
             </div>
         </div>
     </section>
 
     <section class="section reveal" style="background-color: #050505;">
         <h2 class="section-title">Career Path</h2>
+        <p class="section-subtitle">현장과 실무를 관통하며 증명해 온 범용적 비즈니스 이력</p>
+        <div class="swipe-hint">👈 좌우로 드래그(스와이프)하여 넘겨보기 👉</div>
         <div class="career-path">
             <div class="career-box">
-                <h3>📱 통신 및 IT 인프라</h3>
-                <div class="company-list"><span>KTF</span><span>KT M&S</span><span>아이즈비전</span></div>
-                <p>국내 메이저 통신사부터 알뜰폰 생태계까지, B2B 영업과 신규 유통 조직 기획을 총괄하며 성과를 견인했습니다.</p>
+                <h3>📱 통신 및 IT 인프라 세일즈</h3>
+                <div class="company-list"><span>KTF</span><span>KT M&S</span><span>아이즈비전</span><span>대경네트웍스</span></div>
+                <p>국내 메이저 통신사부터 알뜰폰(MVNO) 생태계까지 아우르며 통신 인프라 시장의 최전선에서 활약했습니다. 스마트폰 프레젠테이션 및 FMC 구축 등 B2B 영업을 주도하고, '스마트 에이전트(SA)' 방판 조직을 직접 기획·운영했습니다.</p>
+                <div class="keyword-list">#B2B영업 #FMC구축 #유통기획 #신규조직기획 #온라인영업</div>
             </div>
             <div class="career-box">
-                <h3>🏪 오프라인 공간 디렉팅</h3>
-                <div class="company-list"><span>일본 리테일 매장</span><span>로컬 F&B 매장</span></div>
-                <p>일본에서 리테일 매장을 총괄하고, 창녕에서 로컬 F&B 매장을 창업하여 POS/IoT 자동화 시스템을 100% 자체 구축했습니다.</p>
+                <h3>📦 커머스 및 B2B 유통 총괄</h3>
+                <div class="company-list"><span>한샘팜</span><span>계백무역</span><span>우마켓</span><span>쿠키하우스</span></div>
+                <p>제약/의료기기 영업 관리부터 무역 실무, 아동복 유통, IT 비디오 커머스(V-Commerce)까지 전사 시스템을 구축하고 운영 총괄을 맡아 오프라인의 한계를 넘는 온라인 세일즈 인프라를 성공적으로 구축해왔습니다.</p>
+                <div class="keyword-list">#의료기기영업 #무역 #프로모션운영 #의류유통 #IT서비스</div>
             </div>
             <div class="career-box">
-                <h3>🎬 미디어 마케팅</h3>
-                <div class="company-list"><span>유튜브 채널 운영</span><span>뚜르드몽드</span></div>
-                <p>구독자 1,800명 이상의 채널을 운영하며 검증된 뉴미디어 감각과 탁월한 비주얼라이제이션 능력을 증명했습니다.</p>
+                <h3>🏪 오프라인 공간 & 리테일 디렉팅</h3>
+                <div class="company-list"><span>일본 리테일 매장</span><span>로컬 F&B 매장 (창녕)</span></div>
+                <p>일본에서 2년간 리테일 매장을 총괄 운영하며 글로벌 인바운드 커머스를 경험했습니다. 또한, 창녕에서 F&B 매장을 직접 창업하여 VMD, POS 및 IoT 기반의 매장 자동화 시스템까지 100% 자체 구축했습니다.</p>
+                <div class="keyword-list">#공간디렉팅 #VMD #매장자동화 #IoT구축 #글로벌리테일 #F&B기획</div>
+            </div>
+            <div class="career-box">
+                <h3>🏗️ 건설 현장 공무 및 기술 지원</h3>
+                <div class="company-list"><span>태영건설</span></div>
+                <p>건설 현장 공무기사로 활동하며 현장의 생리를 꿰뚫는 관리 역량을 다졌습니다. 이는 굴착기, 지게차, CNC 밀링 등 중장비 자격 취득으로 이어져 현장의 메커니즘을 마케팅에 융합하는 무기가 되었습니다.</p>
+                <div class="keyword-list">#건설현장공무 #공무기사 #현장관리 #중장비이해도</div>
+            </div>
+            <div class="career-box">
+                <h3>🎬 미디어 마케팅 및 콘텐츠 기획</h3>
+                <div class="company-list"><span>유튜브 채널 운영</span><span>뚜르드몽드</span><span>더골프</span></div>
+                <p>미디어사에서 광고 영업 및 비주얼 홍보 콘텐츠 기획을 수행했습니다. 나아가 구독자 1,800명 이상의 유튜브 채널을 직접 운영하며 영상 자체 생산 능력과 뉴미디어 플랫폼 실전 감각을 증명했습니다.</p>
+                <div class="keyword-list">#유튜버 #영상제작 #타겟광고영업 #홍보콘텐츠기획</div>
             </div>
         </div>
     </section>
@@ -321,17 +382,32 @@
 
     <footer>
         <div class="contact-info">
-            <a href="mailto:ssiat@kakao.com">ssiat@kakao.com</a><span>|</span><a href="tel:010-7369-7369">010-7369-7369</a>
+            <a href="mailto:ssiat@kakao.com">E-mail. ssiat@kakao.com</a> 
+            <span>|</span> 
+            <a href="tel:010-7369-7369">Tel. 010-7369-7369</a>
         </div>
         <p>© 2026 Jeon Sang-hyun. All rights reserved.</p>
     </footer>
 
-    <div class="modal-overlay" id="modal1" onclick="closeModal(event, 'modal1')"><div class="modal-content"><span class="close-btn" onclick="closeModalBtn('modal1')">&times;</span><h2>통신 및 유통 전략 기획</h2><p>B2B 기업 영업부터 거대 유통망 관리까지, 실전 성과를 바탕으로 비즈니스를 리딩합니다.</p></div></div>
-
+    <div class="modal-overlay" id="modal1" onclick="closeModal(event, 'modal1')">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModalBtn('modal1')">&times;</span>
+            <div class="modal-header"><h2>통신 및 유통 전략 기획</h2><p>B2B 기업 영업부터 거대 유통망 컨트롤까지</p></div>
+            <div class="modal-body">
+                <h4>KTF / KT M&S (기업영업 및 유통기획)</h4>
+                <ul>
+                    <li><strong>B2B 기업 영업 및 FMC 구축:</strong> 대기업 대상 최신 스마트폰 도입 프레젠테이션 주도, FMC 구축 지원.</li>
+                    <li><strong>신규 방문판매 조직(SA) 기획:</strong> KT 본사와 합동 TFT 구성, 최초로 SA 조직 기획 및 전담 구축.</li>
+                    <li><strong>국내 최대 IT 상권 관리:</strong> 용산 300개소 이상의 유통망 직접 관리, 데이터 기반 유통 시뮬레이션 수행.</li>
+                </ul>
+                <div class="modal-tags"><span>#B2B영업</span><span>#FMC구축</span><span>#신규조직TFT</span><span>#데이터시뮬레이션</span></div>
+            </div>
+        </div>
+    </div>
     <script>
         /* [1] 기본 기능: 모달 & 스크롤 애니메이션 */
         function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow='hidden'; }
-        function closeModal(e, id) { if(e.target.className.includes('active')) { document.getElementById(id).classList.remove('active'); document.body.style.overflow='auto'; } }
+        function closeModal(e, id) { if(e.target.className.includes('modal-overlay active')) { document.getElementById(id).classList.remove('active'); document.body.style.overflow='auto'; } }
         function closeModalBtn(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow='auto'; }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -339,9 +415,11 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
+                        // Skill Bar 애니메이션
                         if(entry.target.querySelector('.skill-bar-fill')) {
                             entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => bar.style.width = bar.getAttribute('data-width'));
                         }
+                        // Counter 애니메이션 (By the Numbers 섹션 감지 시)
                         if(entry.target.querySelector('.counter')) {
                             startCounters();
                         }
@@ -351,19 +429,34 @@
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         });
 
-        /* [2] By the Numbers: 숫자 카운터 로직 */
+        /* [2] By the Numbers: 숫자 카운터 로직 - 3s (3000ms) */
+        let countersStarted = false; // 한 번만 실행되도록 제어
         function startCounters() {
+            if (countersStarted) return;
+            countersStarted = true;
+            
             const counters = document.querySelectorAll('.counter');
+            const DURATION = 3000; // 전체 애니메이션 시간: 3초
+            const FRAME_RATE = 1000 / 60; // 60FPS
+            const TOTAL_FRAMES = Math.round(DURATION / FRAME_RATE);
+
             counters.forEach(counter => {
                 const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const speed = target / 50;
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + speed);
-                    setTimeout(startCounters, 40);
-                } else {
-                    counter.innerText = target + (target > 1000 ? '+' : '');
-                }
+                let frame = 0;
+
+                const countInterval = setInterval(() => {
+                    frame++;
+                    // Ease-Out 효과 (점점 느려짐)
+                    const progress = 1 - Math.pow(1 - (frame / TOTAL_FRAMES), 3);
+                    const currentCount = Math.round(target * progress);
+                    
+                    if (frame <= TOTAL_FRAMES) {
+                        counter.innerText = currentCount;
+                    } else {
+                        counter.innerText = target + (target > 1000 ? '+' : '');
+                        clearInterval(countInterval);
+                    }
+                }, FRAME_RATE);
             });
         }
 
@@ -374,7 +467,7 @@
             { videoId: "H3gLDVPmpak", tag: "Part 3: Synergy", title: "경계를 넘는 올라운더", desc: "기획, 디자인, 현장 운영 전반을 유기적으로 연결합니다." }
         ];
         let ytPlayer, currentIndex = 0, playStartTime = 0;
-        const PLAY_DURATION = 7;
+        const PLAY_DURATION = 7; // 각 영상 7초 재생
 
         var tag = document.createElement('script'); tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0]; firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
