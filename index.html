@@ -109,8 +109,9 @@
 
         /* About Me */
         /* 🚨 추가됨: 프로필 사진 하단 아이덴티티 배지 스타일 */
-        .profile-badge { width: 100%; background: rgba(0, 255, 0, 0.03); border: 1px solid rgba(0, 255, 0, 0.2); border-radius: 15px; padding: 20px; box-sizing: border-box; text-align: center; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .badge-title { color: #0f0; font-size: 0.8rem; font-weight: 900; letter-spacing: 2px; margin-bottom: 15px; }
+       /* 🚨 수정됨: 아이덴티티 배지 (하단까지 늘리기 & 글자 확대) */
+        .profile-badge { width: 100%; background: rgba(0, 255, 0, 0.03); border: 1px solid rgba(0, 255, 0, 0.2); border-radius: 15px; padding: 20px; box-sizing: border-box; text-align: center; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .badge-title { color: #0f0; font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; margin-bottom: 15px; } /* 🚨 폰트 확 키움 */
         .badge-content { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 15px; }
         .badge-content span { background: #111; border: 1px solid #333; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; color: #eee; font-weight: 500; }
         .badge-quote { font-size: 0.95rem; color: #aaa; font-weight: 300; line-height: 1.6; word-break: keep-all; }
@@ -340,7 +341,8 @@
     </section>
 
     <section class="section reveal">
-     <div class="about-me">
+    <div class="about-me" style="align-items: stretch;">
+            
             <div class="profile-img-container" style="flex: 1; flex-direction: column; display: flex;">
                 <img src="profile.png" alt="전상현 프로필 사진">
                 
@@ -358,7 +360,7 @@
             </div>
             
             <div class="about-me-text" style="flex: 1.5;">
-                <h3>비즈니스의 본질을 꿰뚫는 전략가</h3>
+                <h3 style="margin-top: 0;">비즈니스의 본질을 꿰뚫는 전략가</h3>
                 <p>지난 20여 년간 통신, 무역, 커머스 등 대한민국 산업의 최전선에서 전략 기획과 마케팅을 주도해 온 실전형 전문가입니다. 단순히 기획에 머물지 않고 데이터 기반 유통 시뮬레이션, 대규모 상권 관리 등 실질적인 결과를 만들어왔습니다. 현재 상담복지학을 전공하며 타인을 이해하는 포용적 리더십을 갖추었으며, 다양한 산업군의 생태계를 누구보다 깊이 이해하고 있습니다.</p>
                 
                 <div class="resume-download">
