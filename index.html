@@ -9,7 +9,7 @@
     
     <style>
         /* 폰트 및 기본 설정 */
-        body { margin: 0; font-family: 'SCoreDream', sans-serif !important; color: #eee; line-height: 1.6; background-color: #000; overflow-x: hidden; }
+        body { margin: 0; font-family: 'SCoreDream', -apple-system, sans-serif !important; color: #eee; line-height: 1.6; background-color: #000; overflow-x: hidden; }
         h1, h2, h3, h4 { margin: 0; }
         a { text-decoration: none; color: inherit; }
         ul { margin: 0; padding-left: 20px; }
@@ -85,8 +85,8 @@
         }
        /* 🚨 [기존 코드 교체] 모든 숫자 폰트 굵기(900) 및 크기 통일, 렌더링 문제 해결 */
        /* 🚨 [수정] 영문/기호 폰트 깨짐 방지 및 애니메이션 충돌 제거 */
-       .stat-item h2 {
-            font-family: 'SCoreDream', sans-serif !important; /* 🚨 스마트폰 기본 폰트 튕김 완벽 차단 */
+    .stat-item h2 {
+            font-family: 'SCoreDream', sans-serif !important; /* 🚨 스마트폰 폰트 튕김 완벽 차단 */
             font-size: clamp(2rem, 3vw, 2.8rem); 
             color: #0f0; 
             font-weight: 900 !important; 
@@ -245,8 +245,7 @@
             /* 🚨 숫자 카운터 모바일 2x2 배열 및 사이즈 강제 최적화 (!important 적용) */
             .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; margin-bottom: 40px !important; }
             .stat-item { padding: 15px 10px !important; border-radius: 12px !important; }
-           /* 🚨 [수정] 모바일 환경 폰트 통일 및 네온 스케일업 애니메이션 강제 적용 */
-          .stat-item h2 { font-family: 'SCoreDream', sans-serif !important; font-size: 1.4rem !important; margin-bottom: 5px !important; font-weight: 900 !important; letter-spacing: -0.5px !important; }
+            .stat-item h2 { font-family: 'SCoreDream', sans-serif !important; font-size: 1.4rem !important; margin-bottom: 5px !important; font-weight: 900 !important; letter-spacing: -0.5px !important; }
             .stat-item p { font-size: 0.75rem !important; word-break: keep-all !important; line-height: 1.3 !important; letter-spacing: -0.5px !important; }
 
             .about-me { flex-direction: column; padding: 30px 20px; gap: 30px; margin-bottom: 60px; text-align: center; }
