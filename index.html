@@ -84,16 +84,17 @@
         }
        /* 🚨 [기존 코드 교체] 모든 숫자 폰트 굵기(900) 및 크기 통일, 렌더링 문제 해결 */
        /* 🚨 [수정] 영문/기호 폰트 깨짐 방지 및 애니메이션 충돌 제거 */
-        .stat-item h2 { 
-            font-family: 'SCoreDream', sans-serif !important; /* 영어 'K'가 기본 폰트로 깨지는 현상 완벽 방지 */
+       .stat-item h2 {
+            font-family: 'SCoreDream', sans-serif !important; /* 🚨 스마트폰 기본 폰트 튕김 완벽 차단 */
             font-size: clamp(2rem, 3vw, 2.8rem); 
             color: #0f0; 
-            font-weight: 800 !important; /* 900에서 오류가 날 수 있어 800으로 최적화 */
+            font-weight: 900 !important; 
             margin-bottom: 10px; 
             white-space: nowrap; 
             letter-spacing: -1px; 
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.6s ease;
             -webkit-font-smoothing: antialiased; 
+            transform: translateZ(0); 
         }
         .stat-item.completed h2 {
             transform: scale(1.4); 
@@ -244,8 +245,7 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; margin-bottom: 40px !important; }
             .stat-item { padding: 15px 10px !important; border-radius: 12px !important; }
            /* 🚨 [수정] 모바일 환경 폰트 통일 및 네온 스케일업 애니메이션 강제 적용 */
-            .stat-item h2 { font-family: 'SCoreDream', sans-serif !important; font-size: 1.4rem !important; margin-bottom: 5px !important; font-weight: 800 !important; letter-spacing: -0.5px !important; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.6s ease !important; }
-            .stat-item.completed h2 { transform: scale(1.15) !important; text-shadow: 0 0 15px rgba(0, 255, 0, 0.8) !important; margin-top: 5px !important; margin-bottom: 10px !important; }
+          .stat-item h2 { font-family: 'SCoreDream', sans-serif !important; font-size: 1.4rem !important; margin-bottom: 5px !important; font-weight: 900 !important; letter-spacing: -0.5px !important; }
             .stat-item p { font-size: 0.75rem !important; word-break: keep-all !important; line-height: 1.3 !important; letter-spacing: -0.5px !important; }
 
             .about-me { flex-direction: column; padding: 30px 20px; gap: 30px; margin-bottom: 60px; text-align: center; }
