@@ -108,6 +108,13 @@
         .stat-item p { font-size: 1rem; color: #aaa; font-weight: 500; }
 
         /* About Me */
+        /* 🚨 추가됨: 프로필 사진 하단 아이덴티티 배지 스타일 */
+        .profile-badge { width: 100%; background: rgba(0, 255, 0, 0.03); border: 1px solid rgba(0, 255, 0, 0.2); border-radius: 15px; padding: 20px; box-sizing: border-box; text-align: center; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .badge-title { color: #0f0; font-size: 0.8rem; font-weight: 900; letter-spacing: 2px; margin-bottom: 15px; }
+        .badge-content { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 15px; }
+        .badge-content span { background: #111; border: 1px solid #333; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; color: #eee; font-weight: 500; }
+        .badge-quote { font-size: 0.95rem; color: #aaa; font-weight: 300; line-height: 1.6; word-break: keep-all; }
+        .badge-quote strong { color: #ccc; font-weight: 500; }
         .about-me { display: flex; align-items: center; gap: 50px; background: linear-gradient(145deg, #1a1f1a 0%, #0d0f0d 100%); border: 1px solid #2a332a; border-radius: 20px; padding: 50px; margin-bottom: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .profile-img-container { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; }
         .profile-img-container img { max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0 8px 25px rgba(0, 255, 0, 0.1); animation: profileFadeIn 1s ease 0.5s forwards; opacity: 0; mask-image: linear-gradient(to bottom, black 85%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%); }
@@ -333,24 +340,35 @@
     </section>
 
     <section class="section reveal">
-       <div class="about-me">
-            <div class="profile-img-container" style="flex: 1;">
+     <div class="about-me">
+            <div class="profile-img-container" style="flex: 1; flex-direction: column; display: flex;">
                 <img src="profile.png" alt="전상현 프로필 사진">
+                
+                <div class="profile-badge">
+                    <div class="badge-title">IDENTITY</div>
+                    <div class="badge-content">
+                        <span style="border-color: #0f0; color: #0f0;">#ENFJ</span>
+                        <span>#올라운더</span>
+                        <span>#전략기획</span>
+                    </div>
+                    <div class="badge-quote">
+                        "비즈니스의 성공은 결국<br><strong>사람의 마음을 움직이는 것</strong>에서 시작됩니다."
+                    </div>
+                </div>
             </div>
             
-            <div class="about-me-text" style="flex: 1.3;">
+            <div class="about-me-text" style="flex: 1.5;">
                 <h3>비즈니스의 본질을 꿰뚫는 전략가</h3>
                 <p>지난 20여 년간 통신, 무역, 커머스 등 대한민국 산업의 최전선에서 전략 기획과 마케팅을 주도해 온 실전형 전문가입니다. 단순히 기획에 머물지 않고 데이터 기반 유통 시뮬레이션, 대규모 상권 관리 등 실질적인 결과를 만들어왔습니다. 현재 상담복지학을 전공하며 타인을 이해하는 포용적 리더십을 갖추었으며, 다양한 산업군의 생태계를 누구보다 깊이 이해하고 있습니다.</p>
                 
-                <div class="resume-download" style="margin-bottom: 0;">
+                <div class="resume-download">
                     <a href="resume.pdf" target="_blank" class="download-btn">📥 상세 경력기술서 다운로드 (PDF)</a>
                 </div>
-            </div>
 
-            <div class="skills-container" style="flex: 1.1; display: flex; justify-content: center; align-items: center; position: relative; width: 100%; max-width: 350px; margin: 0 auto;">
-                <canvas id="skillRadarChart"></canvas>
+                <div class="skills-container" style="position: relative; width: 100%; max-width: 450px; margin: 20px auto 0;">
+                    <canvas id="skillRadarChart"></canvas>
+                </div>
             </div>
-        </div>
         </div>
     </section>
 
