@@ -733,13 +733,15 @@
                     maintainAspectRatio: true,
                     scales: {
                         r: {
-                            angleLines: { color: 'rgba(0, 255, 0, 0.2)' },
+                            min: 0,       // 🚨 핵심 수정: 중심점(바닥)을 무조건 0으로 강제 고정!
+                            max: 100,     // 🚨 핵심 수정: 바깥쪽 끝을 무조건 100으로 강제 고정!
+                            angleLines: { color: 'rgba(0, 255, 0, 0.2)' }, 
                             grid: { color: 'rgba(255, 255, 255, 0.1)', circular: true },
                             pointLabels: { 
                                 color: '#fff', 
                                 font: { size: 12, weight: '500' }
                             },
-                            ticks: { display: false, min: 0, max: 100 }
+                            ticks: { display: false } // 눈금 숫자는 안 보이게 숨김
                         }
                     },
                     plugins: { 
@@ -748,12 +750,7 @@
                             backgroundColor: 'rgba(0,0,0,0.8)',
                             titleColor: '#0f0',
                             bodyFont: { size: 14, weight: 'bold' },
-                            displayColors: false,
-                            callbacks: {
-                                label: function(context) {
-                                    return context.raw + '%'; // 툴팁(마우스 올렸을 때)에만 % 표시
-                                }
-                            }
+                            displayColors: false
                         }
                     },
                     animation: { 
