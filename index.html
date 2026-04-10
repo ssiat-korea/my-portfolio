@@ -590,7 +590,7 @@
                 const isCostCounter = counter.id === 'cost-counter';
                 const target = +counter.getAttribute('data-target');
                 const suffix = counter.getAttribute('data-suffix') || ''; // K+ 등 접미사 가져오기
-                const startValue = isCostCounter ? 500000000 : 0; 
+                const startValue = isCostCounter ? 99999999 : 0; 
                 
                 let frame = 0;
 
