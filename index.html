@@ -6,7 +6,9 @@
     <title>전상현 | 비즈니스 성장을 이끄는 통합 마케팅 & 전략 기획자</title>
     
     <link href="https://webfontworld.github.io/score/SCoreDream.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>    
     <style>
         /* 폰트 및 기본 설정 */
         body { margin: 0; font-family: 'SCoreDream', -apple-system, sans-serif !important; color: #eee; line-height: 1.6; background-color: #000; overflow-x: hidden; }
@@ -343,23 +345,8 @@
                     <a href="resume.pdf" target="_blank" class="download-btn">📥 상세 경력기술서 다운로드 (PDF)</a>
                 </div>
                 
-                <div class="skills-container">
-                    <div class="skill-item">
-                        <div class="skill-info"><span>디자인 & 시각화 (Photoshop/Illustrator)</span><span>95%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="95%"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info"><span>디지털 전환 & 콘텐츠 제작 (영상/AI 툴)</span><span>90%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90%"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info"><span>현장 공정 이해도 (CNC/지게차/굴착기 실무)</span><span>85%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85%"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-info"><span>B2B 세일즈 & 비즈니스 커뮤니케이션</span><span>95%</span></div>
-                        <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="95%"></div></div>
-                    </div>
+               <div class="skills-container" style="position: relative; width: 100%; max-width: 450px; margin: 20px auto 0;">
+                    <canvas id="skillRadarChart"></canvas>
                 </div>
 
             </div>
@@ -695,6 +682,83 @@
             }
         });
 
+        // 🚨 스킬 육각형(레이더 차트) 애니메이션 로직
+        setTimeout(() => { 
+            const chartCanvas = document.getElementById('skillRadarChart');
+            if(chartCanvas) {
+                // 스크롤해서 차트가 화면에 절반쯤 보일 때 작동
+                const chartObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if(entry.isIntersecting) {
+                            renderRadarChart();
+                            chartObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                chartObserver.observe(chartCanvas);
+            }
+        }, 500);
+
+        let chartRendered = false;
+        function renderRadarChart() {
+            if(chartRendered) return;
+            chartRendered = true;
+            
+            // 글로벌 폰트 세팅
+            Chart.defaults.font.family = "'SCoreDream', 'Montserrat', sans-serif";
+            Chart.defaults.color = '#ccc';
+
+            const ctx = document.getElementById('skillRadarChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    // 🚨 6가지 핵심 역량 라벨
+                    labels: ['디자인·시각화', '디지털 전환(DX)', '현장 공정 이해', '심리·커뮤니케이션', '경영·비딩 총괄', 'B2B 세일즈'],
+                    datasets: [{
+                        label: '역량 달성도',
+                        // 각 역량별 수치 (95%, 90% 등)
+                        data: [95, 90, 85, 90, 90, 95],
+                        backgroundColor: 'rgba(0, 255, 0, 0.15)', // 네온 초록 반투명 배경
+                        borderColor: '#0f0', // 테두리 네온 초록
+                        borderWidth: 2,
+                        pointBackgroundColor: '#000',
+                        pointBorderColor: '#0f0',
+                        pointHoverBackgroundColor: '#0f0',
+                        pointHoverBorderColor: '#fff',
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 255, 0, 0.2)' }, // 거미줄 뼈대 선
+                            grid: { color: 'rgba(255, 255, 255, 0.1)', circular: true }, // 둥근 격자선
+                            pointLabels: { 
+                                color: '#fff', 
+                                font: { size: 12, weight: '500' }
+                            },
+                            ticks: { display: false, min: 0, max: 100 } // 숫자 눈금 숨기기
+                        }
+                    },
+                    plugins: { 
+                        legend: { display: false }, // 범례 숨기기
+                        tooltip: { // 마우스 올렸을 때 툴팁 디자인
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            titleColor: '#0f0',
+                            bodyFont: { size: 14, weight: 'bold' },
+                            displayColors: false
+                        }
+                    },
+                    animation: { 
+                        duration: 2000, 
+                        easing: 'easeOutQuart' // 부드럽고 탄력있게 펼쳐지는 효과
+                    }
+                }
+            });
+        }
         /* =========================================
            🚨 유튜브 API 및 7초 순차 재생 로직
         ========================================= */
