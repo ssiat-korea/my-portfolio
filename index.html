@@ -229,6 +229,12 @@
         .contact-info span { margin: 0 15px; color: #333; }
         footer p { margin: 5px 0; font-size: 0.9rem; }
 
+        /* 🚨 커리어 별자리 타임라인 스타일 */
+        .constellation-wrapper { position: relative; width: 90%; max-width: 800px; margin: 0 auto 40px; height: 30px; display: flex; justify-content: space-between; align-items: center; z-index: 5; }
+        .constellation-track { position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: #2a332a; transform: translateY(-50%); z-index: 1; }
+        .constellation-fill { position: absolute; top: 50%; left: 0; width: 0%; height: 2px; background: #0f0; transform: translateY(-50%); z-index: 2; transition: width 0.2s ease-out; box-shadow: 0 0 10px #0f0; }
+        .star-node { width: 30px; height: 30px; background: #111; border: 2px solid #2a332a; border-radius: 50%; z-index: 3; display: flex; justify-content: center; align-items: center; color: #555; font-size: 0.8rem; font-weight: 700; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.8); font-family: 'Montserrat', sans-serif; }
+        .star-node.active { border-color: #0f0; color: #000; background: #0f0; box-shadow: 0 0 15px rgba(0, 255, 0, 0.8); transform: scale(1.3); }
         /* 🚨 모바일 최적화 (이 부분 전체를 통째로 교체하세요!) */
         @media screen and (max-width: 768px) {
             .hero { padding: 120px 20px 80px; min-height: auto; }
@@ -278,6 +284,8 @@
             .modal-tags span { font-size: 0.8rem; padding: 5px 12px; }
             .contact-info { display: flex; flex-direction: column; gap: 10px; font-size: 1.1rem; }
             .contact-info span { display: none; } 
+            .constellation-wrapper { width: 85%; margin-bottom: 30px; }
+            .star-node { width: 24px; height: 24px; font-size: 0.7rem; }
             footer { padding: 40px 20px; }
         }
     </style>
@@ -394,10 +402,20 @@
         </div>
     </section>
 
-    <section class="section reveal" style="background-color: #050505;">
+   <section class="section reveal" style="background-color: #050505;">
         <h2 class="section-title">Career Path</h2>
         <p class="section-subtitle">현장과 실무를 관통하며 증명해 온 범용적 비즈니스 이력</p>
         
+        <div class="constellation-wrapper">
+            <div class="constellation-track"></div>
+            <div class="constellation-fill" id="star-fill"></div>
+            <div class="star-node active">1</div>
+            <div class="star-node">2</div>
+            <div class="star-node">3</div>
+            <div class="star-node">4</div>
+            <div class="star-node">5</div>
+        </div>
+
         <div class="swipe-hint">👈 좌우로 드래그(스와이프)하여 넘겨보기 👉</div>
 
         <div class="career-path">
@@ -639,7 +657,31 @@
             const walk = (x - startX) * 2; 
             slider.scrollLeft = scrollLeft - walk;
         });
+// 🚨 별자리 선 긋기 연동 로직 (스크롤할 때마다 작동)
+        slider.addEventListener('scroll', () => {
+            const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+            // 스크롤이 아예 불가능한 상황(화면이 넓은 경우) 방어
+            if (maxScrollLeft <= 0) return; 
+            
+            const scrollPercentage = (slider.scrollLeft / maxScrollLeft) * 100;
+            
+            // 네온 선 채우기
+            const starFill = document.getElementById('star-fill');
+            if(starFill) starFill.style.width = scrollPercentage + '%';
 
+            // 구간별로 별에 불 켜기
+            const starNodes = document.querySelectorAll('.star-node');
+            const nodePercentage = 100 / (starNodes.length - 1);
+            
+            starNodes.forEach((node, index) => {
+                // 스크롤이 해당 별 위치의 근처(-10%)에 도달하면 불이 켜짐
+                if (scrollPercentage >= (index * nodePercentage) - 10) {
+                    node.classList.add('active');
+                } else {
+                    node.classList.remove('active');
+                }
+            });
+        });
         window.addEventListener('scroll', function() {
             const heroBg = document.getElementById('hero-bg');
             if(heroBg) {
