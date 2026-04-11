@@ -282,6 +282,17 @@
            
         .career-slider::-webkit-scrollbar { display: none; }
 
+        /* 🚨 무기고 중앙 자동 점등용 클래스 (JS에서 제어함) */
+        .tech-badge.neon-active {
+            color: #000 !important;
+            background: #0f0 !important;
+            border-color: #0f0 !important;
+            box-shadow: 0 0 20px rgba(0,255,0,0.9) !important;
+            transform: scale(1.1); /* 스포트라이트 받을 때 살짝 커지는 효과 */
+            z-index: 10;
+        }
+        
+        
         /* 시뮬레이터 모바일 대응 */
         @media screen and (max-width: 768px) {
             .simulator-box { padding: 30px 20px; }
@@ -1207,6 +1218,59 @@
             })
             .catch(error => {
                 alert("네트워크 오류가 발생했습니다.");
+            });
+        }
+        /* =========================================
+           🚨 1. 무기고 정중앙 네온 자동 점등 센서
+        ========================================= */
+        // 화면의 정중앙 20% 영역에만 반응하는 가상의 센서를 만듭니다.
+        const neonObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('neon-active'); // 중앙에 오면 네온 켜기
+                } else {
+                    entry.target.classList.remove('neon-active'); // 벗어나면 네온 끄기
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '0px -40% 0px -40%', // 화면 좌우 40%씩 잘라내고 중앙 20%만 감지
+            threshold: 0
+        });
+
+        // 모든 무기(배지)에 센서 달기
+        document.querySelectorAll('.tech-badge').forEach(badge => {
+            neonObserver.observe(badge);
+        });
+
+        /* =========================================
+           🚨 2. 커리어 패스 모바일 관성 강제 브레이크 (ABS)
+        ========================================= */
+        // 스마트폰의 스와이프 관성을 JS로 강제로 끊어버리는 하드코어 로직
+        const careerPathBox = document.querySelector('.career-path');
+        let touchStartScroll = 0;
+        let cardFullWidth = 0;
+
+        if (careerPathBox) {
+            careerPathBox.addEventListener('touchstart', () => {
+                touchStartScroll = careerPathBox.scrollLeft;
+                const firstCard = document.querySelector('.career-box');
+                if(firstCard) {
+                    cardFullWidth = firstCard.offsetWidth + 20; // 카드 너비 + 여백
+                }
+            }, {passive: true});
+
+            careerPathBox.addEventListener('scroll', () => {
+                // 스크롤된 거리가 딱 1장 너비의 80%를 넘어가는 순간!
+                if (Math.abs(careerPathBox.scrollLeft - touchStartScroll) > cardFullWidth * 0.8) {
+                    
+                    // 스크롤 기능을 0.05초 동안 껐다 켭니다 (관성이 완벽하게 죽어버림)
+                    careerPathBox.style.overflowX = 'hidden'; 
+                    
+                    setTimeout(() => {
+                        careerPathBox.style.overflowX = 'auto';
+                    }, 50);
+                }
             });
         }
     </script>
