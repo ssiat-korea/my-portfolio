@@ -165,7 +165,7 @@
         .career-path:active { cursor: grabbing; } 
         .career-path::-webkit-scrollbar { display: none; }
 
-        .career-box { flex: 0 0 calc(33.333% - 14px); scroll-snap-align: start; background: linear-gradient(145deg, #1a1f1a 0%, #0d0f0d 100%); border-radius: 15px; padding: 40px; border: 1px solid #2a332a; border-left: 5px solid #0f0; box-shadow: 0 8px 25px rgba(0,0,0,0.8); transition: box-shadow 0.3s ease; display: flex; flex-direction: column; user-select: none; }
+        .career-box { flex: 0 0 calc(33.333% - 14px); scroll-snap-align: scroll-snap-stop: always; start; background: linear-gradient(145deg, #1a1f1a 0%, #0d0f0d 100%); border-radius: 15px; padding: 40px; border: 1px solid #2a332a; border-left: 5px solid #0f0; box-shadow: 0 8px 25px rgba(0,0,0,0.8); transition: box-shadow 0.3s ease; display: flex; flex-direction: column; user-select: none; }
         .career-box:hover { box-shadow: 0 12px 30px rgba(0,255,0,0.1); }
         .career-box h3 { font-size: 1.4rem; color: #fff; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; word-break: keep-all; line-height: 1.3;}
         .company-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
@@ -248,31 +248,7 @@
         .star-node { width: 30px; height: 30px; background: #111; border: 2px solid #2a332a; border-radius: 50%; z-index: 3; display: flex; justify-content: center; align-items: center; color: #555; font-size: 0.8rem; font-weight: 700; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.8); font-family: 'Montserrat', sans-serif; }
         .star-node.active { border-color: #0f0; color: #000; background: #0f0; box-shadow: 0 0 15px rgba(0, 255, 0, 0.8); transform: scale(1.3); }
 
-   <section class="section" style="padding-bottom: 20px; background-color: #050505; opacity: 1 !important; visibility: visible !important;">
-        <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 30px;">My Tech Arsenal ⚙️</h2>
-        <div class="marquee-container">
-            <div class="marquee-track">
-                <span class="tech-badge">ChatGPT & Gen-AI</span>
-                <span class="tech-badge">Midjourney</span>
-                <span class="tech-badge">Photoshop / Illustrator</span>
-                <span class="tech-badge">Premiere Pro / Final Cut</span>
-                <span class="tech-badge">MS Office (Excel/PPT/Word)</span>
-                <span class="tech-badge">Google Analytics</span>
-                <span class="tech-badge">Figma</span>
-                <span class="tech-badge">Notion / Slack</span>
-
-                <span class="tech-badge">ChatGPT & Gen-AI</span>
-                <span class="tech-badge">Midjourney</span>
-                <span class="tech-badge">Photoshop / Illustrator</span>
-                <span class="tech-badge">Premiere Pro / Final Cut</span>
-                <span class="tech-badge">MS Office (Excel/PPT/Word)</span>
-                <span class="tech-badge">Google Analytics</span>
-                <span class="tech-badge">Figma</span>
-                <span class="tech-badge">Notion / Slack</span>
-            </div>
-        </div>
-    </section>
-       /* 🚨 ROI 시뮬레이터 스타일 */
+         /* 🚨 ROI 시뮬레이터 스타일 */
         .simulator-box { background: linear-gradient(145deg, #111 0%, #050505 100%); border: 1px solid #2a332a; border-radius: 20px; padding: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); margin: 0 auto; max-width: 900px; }
         .slider-labels { display: flex; justify-content: space-between; color: #888; font-weight: 700; margin-bottom: 20px; font-size: 1.1rem; }
         .label-right { color: #0f0; transition: text-shadow 0.3s; }
@@ -303,25 +279,7 @@
         .tech-badge:hover { color: #000; background: #0f0; border-color: #0f0; box-shadow: 0 0 15px rgba(0,255,0,0.8); cursor: crosshair; }
         @keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 10px)); } }
 
-        /* 🚨 커리어 슬라이더 전체 컨테이너 (자석 스냅 활성화) */
-        .career-slider {
-            display: flex;
-            overflow-x: auto;
-            gap: 25px;
-            padding: 20px 0 40px 0; /* 카드가 잘리지 않게 하단 여백 추가 */
-            scroll-behavior: smooth;
-            /* 기존 코드들 아래에 이거 한 줄만 추가! */
-             -webkit-overflow-scrolling: touch;
-            
-            /* 핵심: 가로 방향 자석 기능 켜기 */
-            scroll-snap-type: x mandatory; 
-          
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            /* 기존 코드들 아래에 이 두 줄만 추가! */
-            scroll-snap-align: center; 
-            scroll-snap-stop: always;
-        }
+           
         .career-slider::-webkit-scrollbar { display: none; }
 
         /* 시뮬레이터 모바일 대응 */
@@ -569,6 +527,30 @@
         </div>
     </section>
 
+     <section class="section" style="padding-bottom: 20px; background-color: #050505; opacity: 1 !important; visibility: visible !important;">
+        <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 30px;">My Tech Arsenal ⚙️</h2>
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <span class="tech-badge">ChatGPT & Gen-AI</span>
+                <span class="tech-badge">Midjourney</span>
+                <span class="tech-badge">Photoshop / Illustrator</span>
+                <span class="tech-badge">Premiere Pro / Final Cut</span>
+                <span class="tech-badge">MS Office (Excel/PPT/Word)</span>
+                <span class="tech-badge">Google Analytics</span>
+                <span class="tech-badge">Figma</span>
+                <span class="tech-badge">Notion / Slack</span>
+
+                <span class="tech-badge">ChatGPT & Gen-AI</span>
+                <span class="tech-badge">Midjourney</span>
+                <span class="tech-badge">Photoshop / Illustrator</span>
+                <span class="tech-badge">Premiere Pro / Final Cut</span>
+                <span class="tech-badge">MS Office (Excel/PPT/Word)</span>
+                <span class="tech-badge">Google Analytics</span>
+                <span class="tech-badge">Figma</span>
+                <span class="tech-badge">Notion / Slack</span>
+            </div>
+        </div>
+    </section>
       
 <section class="section reveal">
         <h2 class="section-title">ROI Simulator</h2>
