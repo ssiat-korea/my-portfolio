@@ -542,23 +542,23 @@
         <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 30px;">My Tech Arsenal ⚙️</h2>
         <div class="marquee-container">
             <div class="marquee-track">
-                <span class="tech-badge">ChatGPT & Gen-AI</span>
-                <span class="tech-badge">Midjourney</span>
-                <span class="tech-badge">Photoshop / Illustrator</span>
+                <span class="tech-badge">ChatGPT & GEN-AI</span>
+                <span class="tech-badge">VIDEO AI Tools</span>
+                <span class="tech-badge">Photoshop / llustrator</span>
                 <span class="tech-badge">Premiere Pro / Final Cut</span>
                 <span class="tech-badge">MS Office (Excel/PPT/Word)</span>
                 <span class="tech-badge">Google Analytics</span>
                 <span class="tech-badge">Figma</span>
-                <span class="tech-badge">Notion / Slack</span>
+                <span class="tech-badge">OS / HARDWARE</span>
 
                 <span class="tech-badge">ChatGPT & Gen-AI</span>
-                <span class="tech-badge">Midjourney</span>
-                <span class="tech-badge">Photoshop / Illustrator</span>
+                <span class="tech-badge">VIDEO AI Tools</span>
+                <span class="tech-badge">Photoshop / llustrator</span>
                 <span class="tech-badge">Premiere Pro / Final Cut</span>
                 <span class="tech-badge">MS Office (Excel/PPT/Word)</span>
                 <span class="tech-badge">Google Analytics</span>
                 <span class="tech-badge">Figma</span>
-                <span class="tech-badge">Notion / Slack</span>
+                <span class="tech-badge">OS / HARDWARE</span>
             </div>
         </div>
     </section>
@@ -1243,36 +1243,6 @@
             neonObserver.observe(badge);
         });
 
-        /* =========================================
-           🚨 2. 커리어 패스 모바일 관성 강제 브레이크 (ABS)
-        ========================================= */
-        // 스마트폰의 스와이프 관성을 JS로 강제로 끊어버리는 하드코어 로직
-        const careerPathBox = document.querySelector('.career-path');
-        let touchStartScroll = 0;
-        let cardFullWidth = 0;
-
-        if (careerPathBox) {
-            careerPathBox.addEventListener('touchstart', () => {
-                touchStartScroll = careerPathBox.scrollLeft;
-                const firstCard = document.querySelector('.career-box');
-                if(firstCard) {
-                    cardFullWidth = firstCard.offsetWidth + 20; // 카드 너비 + 여백
-                }
-            }, {passive: true});
-
-            careerPathBox.addEventListener('scroll', () => {
-                // 스크롤된 거리가 딱 1장 너비의 80%를 넘어가는 순간!
-                if (Math.abs(careerPathBox.scrollLeft - touchStartScroll) > cardFullWidth * 0.8) {
-                    
-                    // 스크롤 기능을 0.1초 동안 껐다 켭니다 (관성이 완벽하게 죽어버림)
-                    careerPathBox.style.overflowX = 'hidden'; 
-                    
-                    setTimeout(() => {
-                        careerPathBox.style.overflowX = 'auto';
-                    }, 100);
-                }
-            });
-        }
-    </script>
+      </script>
 </body>
 </html>
