@@ -302,7 +302,53 @@
         .tech-badge { font-family: 'Montserrat', 'SCoreDream', sans-serif; font-size: 1rem; color: #888; border: 1px solid #333; border-radius: 30px; padding: 10px 25px; background: rgba(255,255,255,0.02); transition: all 0.3s; white-space: nowrap; }
         .tech-badge:hover { color: #000; background: #0f0; border-color: #0f0; box-shadow: 0 0 15px rgba(0,255,0,0.8); cursor: crosshair; }
         @keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 10px)); } }
+
+        /* 🚨 커리어 슬라이더 전체 컨테이너 (자석 스냅 활성화) */
+        .career-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 25px;
+            padding: 20px 0 40px 0; /* 카드가 잘리지 않게 하단 여백 추가 */
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            
+            /* 핵심: 가로 방향 자석 기능 켜기 */
+            scroll-snap-type: x mandatory; 
+            
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .career-slider::-webkit-scrollbar { display: none; }
+
+        /* 🚨 개별 커리어 카드 (브레이크 달기) */
+        .career-card {
+            min-width: 320px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 20px;
+            padding: 35px 30px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            
+            /* 핵심: 카드가 무조건 가운데 정렬되며 안착되도록 함 */
+            scroll-snap-align: center; 
+            /* 핵심: 세게 밀어도 무조건 한 장에서 강제 브레이크! */
+            scroll-snap-stop: always; 
+        }
         
+        .career-card:hover {
+            border-color: #0f0;
+            box-shadow: 0 10px 25px rgba(0,255,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        /* 모바일 대응 (모바일에서는 화면 85%만 차지해서 다음 카드가 살짝 보이게) */
+        @media screen and (max-width: 768px) {
+            .career-card {
+                min-width: 85vw; /* 화면 넓이의 85% */
+                margin: 0 5px;
+            }
+        }
         /* 시뮬레이터 모바일 대응 */
         @media screen and (max-width: 768px) {
             .simulator-box { padding: 30px 20px; }
@@ -547,6 +593,38 @@
             <div class="progress-container" id="progress-container"></div>
         </div>
     </section>
+
+    <section class="section reveal">
+        <h2 class="section-title">All-rounder Career 🚀</h2>
+        <p class="section-subtitle">기획부터 마케팅, 유통까지. 실질적인 결과를 만든 실전 경험입니다.</p>
+
+        <div class="career-slider">
+            <div class="career-card">
+                <h3 style="color: #0f0; margin-top: 0; font-size: 1.5rem;">2026.03 ~</h3>
+                <h4 style="font-size: 1.2rem; margin-bottom: 10px;">'안녕, 창녕 술집' 리브랜딩</h4>
+                <p style="color: #aaa; font-size: 0.95rem; line-height: 1.6; word-break: keep-all;">기존 브랜드에서 새로운 정체성으로 리브랜딩 성공. AI 툴을 활용한 메뉴판 및 마케팅 자료 자체 제작으로 외주 디자인 비용 100% 절감 및 운영 효율화 달성.</p>
+            </div>
+            
+            <div class="career-card">
+                <h3 style="color: #0f0; margin-top: 0; font-size: 1.5rem;">2026.01</h3>
+                <h4 style="font-size: 1.2rem; margin-bottom: 10px;">더조은유통 컨설팅</h4>
+                <p style="color: #aaa; font-size: 0.95rem; line-height: 1.6; word-break: keep-all;">기업 비즈니스 인프라 초기 세팅 및 마케팅 전략 수립 컨설팅 수행. 데이터 기반 상권 분석을 통한 효율적인 업무 프로세스 내재화 완수.</p>
+            </div>
+            
+            <div class="career-card">
+                <h3 style="color: #0f0; margin-top: 0; font-size: 1.5rem;">2000 ~ 현재</h3>
+                <h4 style="font-size: 1.2rem; margin-bottom: 10px;">대한민국 산업 최전선</h4>
+                <p style="color: #aaa; font-size: 0.95rem; line-height: 1.6; word-break: keep-all;">통신, 무역, 커머스 등 다양한 생태계에서 20여 년간 전략 기획 및 마케팅 주도. 실질적인 매출 증대 및 데이터 기반 의사결정 프로세스 확립.</p>
+            </div>
+            
+            <div class="career-card">
+                <h3 style="color: #0f0; margin-top: 0; font-size: 1.5rem;">2024 ~ 현재</h3>
+                <h4 style="font-size: 1.2rem; margin-bottom: 10px;">상담복지학 전공</h4>
+                <p style="color: #aaa; font-size: 0.95rem; line-height: 1.6; word-break: keep-all;">조직 관리와 고객 커뮤니케이션의 본질을 이해하기 위한 학문적 접근. 사람의 마음을 움직이는 ENFJ 특유의 포용적 리더십 장착.</p>
+            </div>
+        </div>
+    </section>
+    
 <section class="section reveal">
         <h2 class="section-title">ROI Simulator</h2>
         <p class="section-subtitle">직접 슬라이더를 움직여 일반 대행과 전상현 기획자의 가치를 비교해 보세요</p>
