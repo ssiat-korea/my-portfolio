@@ -1223,7 +1223,7 @@
         /* =========================================
            🚨 1. 무기고 정중앙 네온 자동 점등 센서
         ========================================= */
-        // 화면의 정중앙 20% 영역에만 반응하는 가상의 센서를 만듭니다.
+        // 화면의 정중앙 10% 영역에만 반응하는 가상의 센서를 만듭니다.
         const neonObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -1234,7 +1234,7 @@
             });
         }, {
             root: null,
-            rootMargin: '0px -40% 0px -40%', // 화면 좌우 40%씩 잘라내고 중앙 20%만 감지
+            rootMargin: '0px -45% 0px -45%', // 화면 좌우 45%씩 잘라내고 중앙 10%만 감지
             threshold: 0
         });
 
@@ -1264,12 +1264,12 @@
                 // 스크롤된 거리가 딱 1장 너비의 80%를 넘어가는 순간!
                 if (Math.abs(careerPathBox.scrollLeft - touchStartScroll) > cardFullWidth * 0.8) {
                     
-                    // 스크롤 기능을 0.05초 동안 껐다 켭니다 (관성이 완벽하게 죽어버림)
+                    // 스크롤 기능을 0.1초 동안 껐다 켭니다 (관성이 완벽하게 죽어버림)
                     careerPathBox.style.overflowX = 'hidden'; 
                     
                     setTimeout(() => {
                         careerPathBox.style.overflowX = 'auto';
-                    }, 50);
+                    }, 100);
                 }
             });
         }
