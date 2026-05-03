@@ -16,6 +16,17 @@
         a { text-decoration: none; color: inherit; }
         ul { margin: 0; padding-left: 20px; }
         li { margin-bottom: 8px; color: #ccc; font-weight: 300;}
+
+        /* 🚨 배경 영상 재생 버튼 & 컨트롤 바 완벽 숨김 처리 */
+video::-webkit-media-controls {
+    display: none !important;
+}
+video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+video::-webkit-media-controls-panel {
+    display: none !important;
+}
         
         /* 스크롤 애니메이션 */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
