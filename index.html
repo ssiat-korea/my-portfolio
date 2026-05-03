@@ -27,7 +27,7 @@
         @keyframes fuseIn {
             0% { opacity: 0; transform: scale(0.5); color: #fff; text-shadow: none; }
             40% { opacity: 1; transform: scale(1.3); color: #ff5e00; text-shadow: 0 0 25px #ff5e00; } 
-            100% { opacity: 1; transform: scale(1); color: #0f0; text-shadow: 0 0 15px rgba(0,255,0,0.5); } 
+            100% { opacity: 1; transform: scale(1); color: #00b4d8; text-shadow: 0 0 15px rgba(0,255,0,0.5); } 
         }
         @keyframes shootLeft { 0% { width: 0; opacity: 0; } 50% { opacity: 1; } 100% { width: 100px; opacity: 1; } }
         @keyframes shootRight { 0% { width: 0; opacity: 0; } 50% { opacity: 1; } 100% { width: 100px; opacity: 1; } }
@@ -59,15 +59,15 @@
         .word-right { opacity: 0; animation: slideInRight 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1) 0.3s forwards; }
         .bridge-line { display: flex; align-items: center; justify-content: center; position: relative; margin-bottom: 10px; }
         .word-bridge { font-size: 3.2rem; font-weight: 900; position: relative; opacity: 0; z-index: 2; animation: fuseIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.2s forwards; }
-        .word-bridge::before { content: ''; position: absolute; top: 50%; right: 120%; height: 3px; background: linear-gradient(270deg, #0f0, #ff5e00, transparent); box-shadow: -5px 0 10px rgba(255, 94, 0, 0.5); border-radius: 5px; animation: shootLeft 0.6s ease-out 1.5s forwards; }
-        .word-bridge::after { content: ''; position: absolute; top: 50%; left: 120%; height: 3px; background: linear-gradient(90deg, #0f0, #ff5e00, transparent); box-shadow: 5px 0 10px rgba(255, 94, 0, 0.5); border-radius: 5px; animation: shootRight 0.6s ease-out 1.5s forwards; }
-        .word-power { font-size: 4.2rem; font-weight: 900; color: #0f0; letter-spacing: -2px; opacity: 0; animation: popUpPower 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1) 2.2s forwards; }
+        .word-bridge::before { content: ''; position: absolute; top: 50%; right: 120%; height: 3px; background: linear-gradient(270deg, #00b4d8, #ff5e00, transparent); box-shadow: -5px 0 10px rgba(255, 94, 0, 0.5); border-radius: 5px; animation: shootLeft 0.6s ease-out 1.5s forwards; }
+        .word-bridge::after { content: ''; position: absolute; top: 50%; left: 120%; height: 3px; background: linear-gradient(90deg, #00b4d8, #ff5e00, transparent); box-shadow: 5px 0 10px rgba(255, 94, 0, 0.5); border-radius: 5px; animation: shootRight 0.6s ease-out 1.5s forwards; }
+        .word-power { font-size: 4.2rem; font-weight: 900; color: #00b4d8; letter-spacing: -2px; opacity: 0; animation: popUpPower 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.1) 2.2s forwards; }
         .hero p { font-size: 1.3rem; opacity: 0; font-weight: 300; letter-spacing: 1px; margin-top: 20px; animation: popUpPower 1s ease 2.6s forwards; color: rgba(255,255,255,0.7); }
 
         /* 섹션 공통 */
         .section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
         .section-title { text-align: center; font-size: 2.3rem; margin-bottom: 60px; color: #fff; font-weight: 800; }
-        .section-subtitle { text-align: center; color: #0f0; font-weight: 500; margin-top: -50px; margin-bottom: 60px; font-size: 1.1rem; }
+        .section-subtitle { text-align: center; color: #00b4d8; font-weight: 500; margin-top: -50px; margin-bottom: 60px; font-size: 1.1rem; }
 
         /* 🚨 숫자 카운터 및 네온 효과 스타일 */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; margin-bottom: 40px; }
@@ -84,7 +84,7 @@
             transform: translateZ(0); /* 모바일 애니메이션 시 폰트 일그러짐 완벽 방지 */
         }
         .stat-item.completed {
-            border-color: #0f0; /* 완료 시 스트로크 네온 효과 */
+            border-color: #00b4d8; /* 완료 시 스트로크 네온 효과 */
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.15);
         }
        /* 🚨 [기존 코드 교체] 모든 숫자 폰트 굵기(900) 및 크기 통일, 렌더링 문제 해결 */
@@ -92,7 +92,7 @@
    .stat-item h2 { 
             font-family: 'Pretendard', 'Montserrat', 'Helvetica Neue', 'Arial', '맑은 고딕', 'Malgun Gothic', sans-serif !important; 
             font-size: clamp(2rem, 3vw, 2.8rem); 
-            color: #0f0; 
+            color: #00b4d8; 
             font-weight: 900 !important; 
             margin-bottom: 10px; 
             white-space: nowrap; 
@@ -113,7 +113,7 @@
         /* 🚨 추가됨: 프로필 사진 하단 아이덴티티 배지 스타일 */
        /* 🚨 수정됨: 아이덴티티 배지 (하단까지 늘리기 & 글자 확대) */
         .profile-badge { width: 100%; background: rgba(0, 255, 0, 0.03); border: 1px solid rgba(0, 255, 0, 0.2); border-radius: 15px; padding: 20px; box-sizing: border-box; text-align: center; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); flex: 1; display: flex; flex-direction: column; justify-content: center; }
-        .badge-title { color: #0f0; font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; margin-bottom: 15px; } /* 🚨 폰트 확 키움 */
+        .badge-title { color: #00b4d8; font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; margin-bottom: 15px; } /* 🚨 폰트 확 키움 */
         .badge-content { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 15px; }
         .badge-content span { background: #111; border: 1px solid #333; padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; color: #eee; font-weight: 500; }
         .badge-quote { font-size: 0.95rem; color: #aaa; font-weight: 300; line-height: 1.6; word-break: keep-all; }
@@ -126,25 +126,25 @@
         .about-me-text p { color: #d8d8d8; font-weight: 300; line-height: 1.8; font-size: 1.05rem; word-break: keep-all; margin-bottom: 25px;}
         
         .resume-download { margin-bottom: 30px; }
-        .download-btn { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 255, 0, 0.05); color: #0f0; border: 1px solid #0f0; padding: 10px 20px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; transition: all 0.3s ease; }
-        .download-btn:hover { background: #0f0; color: #000; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2); }
+        .download-btn { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 255, 0, 0.05); color: #00b4d8; border: 1px solid #00b4d8; padding: 10px 20px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; transition: all 0.3s ease; }
+        .download-btn:hover { background: #00b4d8; color: #000; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 255, 0, 0.2); }
 
         .skills-container { margin-top: 10px; }
         .skill-item { margin-bottom: 15px; }
         .skill-info { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.9rem; color: #bbb; font-weight: 500;}
         .skill-bar-bg { width: 100%; background-color: #222; border-radius: 10px; height: 8px; overflow: hidden; border: 1px solid #333;}
-        .skill-bar-fill { height: 100%; background: linear-gradient(90deg, #ff5e00, #0f0); border-radius: 10px; width: 0; transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .skill-bar-fill { height: 100%; background: linear-gradient(90deg, #ff5e00, #00b4d8); border-radius: 10px; width: 0; transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
         /* 포트폴리오 그리드 */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
         .card { background: linear-gradient(145deg, #1a1f1a 0%, #0d0f0d 100%); padding: 40px; border-radius: 15px; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; border: 1px solid #2a332a; box-shadow: 0 8px 25px rgba(0,0,0,0.8); cursor: pointer; position: relative; overflow: hidden; display: flex; flex-direction: column; -webkit-tap-highlight-color: transparent; }
-        .card::after { content: '상세 경력 보기 +'; position: absolute; bottom: 25px; right: 30px; font-size: 0.9rem; color: #0f0; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; }
-        .card:hover, .card:active { transform: translateY(-12px); box-shadow: 0 15px 40px rgba(0, 255, 0, 0.15); border-color: #0f0; }
+        .card::after { content: '상세 경력 보기 +'; position: absolute; bottom: 25px; right: 30px; font-size: 0.9rem; color: #00b4d8; font-weight: 500; opacity: 0; transition: opacity 0.3s ease; }
+        .card:hover, .card:active { transform: translateY(-12px); box-shadow: 0 15px 40px rgba(0, 255, 0, 0.15); border-color: #00b4d8; }
         .card:hover::after, .card:active::after { opacity: 1; }
         .card h3 { font-size: 1.5rem; margin-bottom: 20px; color: #fff; font-weight: 700; display: flex; align-items: center; gap: 10px; }
         .card p { font-size: 1.05rem; color: #d8d8d8; font-weight: 300; word-break: keep-all; line-height: 1.8; flex-grow: 1; }
        .card strong { 
-            color: #0f0; 
+            color: #00b4d8; 
             font-weight: 600; 
             display: inline-block; 
             margin-top: 25px; 
@@ -158,20 +158,20 @@
         }
 
         /* 가로 스와이프 커리어 패스 */
-        .swipe-hint { text-align: right; color: #0f0; font-size: 0.9rem; margin-bottom: 15px; font-weight: 500; opacity: 0.8; animation: pulseHint 2s infinite ease-in-out; pointer-events: none; }
+        .swipe-hint { text-align: right; color: #00b4d8; font-size: 0.9rem; margin-bottom: 15px; font-weight: 500; opacity: 0.8; animation: pulseHint 2s infinite ease-in-out; pointer-events: none; }
         @keyframes pulseHint { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
 
         .career-path { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 20px; -ms-overflow-style: none; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; }
         .career-path:active { cursor: grabbing; } 
         .career-path::-webkit-scrollbar { display: none; }
 
-        .career-box { flex: 0 0 calc(33.333% - 14px); scroll-snap-align: scroll-snap-stop: always; start; background: linear-gradient(145deg, #1a1f1a 0%, #0d0f0d 100%); border-radius: 15px; padding: 40px; border: 1px solid #2a332a; border-left: 5px solid #0f0; box-shadow: 0 8px 25px rgba(0,0,0,0.8); transition: box-shadow 0.3s ease; display: flex; flex-direction: column; user-select: none; }
+        .career-box { flex: 0 0 calc(33.333% - 14px); scroll-snap-align: scroll-snap-stop: always; start; background: linear-gradient(145deg, #1a1f1a 0%, #0d0f0d 100%); border-radius: 15px; padding: 40px; border: 1px solid #2a332a; border-left: 5px solid #00b4d8; box-shadow: 0 8px 25px rgba(0,0,0,0.8); transition: box-shadow 0.3s ease; display: flex; flex-direction: column; user-select: none; }
         .career-box:hover { box-shadow: 0 12px 30px rgba(0,255,0,0.1); }
         .career-box h3 { font-size: 1.4rem; color: #fff; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; word-break: keep-all; line-height: 1.3;}
         .company-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
         .company-list span { background: #1a1f1a; color: #fff; padding: 6px 12px; border-radius: 30px; font-size: 0.85rem; font-weight: 500; border: 1px solid #334433; }
         .career-box p { color: #d8d8d8; font-weight: 300; line-height: 1.7; margin-bottom: 20px; font-size: 1rem; flex-grow: 1; word-break: keep-all;}
-        .keyword-list { color: #0f0; font-size: 0.85rem; font-weight: 400; line-height: 1.5; }
+        .keyword-list { color: #00b4d8; font-size: 0.85rem; font-weight: 400; line-height: 1.5; }
         .career-box a { pointer-events: auto; position: relative; z-index: 10; }
 
         /* 올라운더 비디오 섹션 (유튜브 백그라운드용 CSS 최적화) */
@@ -197,69 +197,69 @@
         .video-hero p { font-size: 1.2rem; line-height: 1.7; opacity: 0.9; font-weight: 300; word-break: keep-all; text-shadow: 0 2px 10px rgba(0,0,0,0.5); transition: all 0.5s ease; color: #fff; }
         .progress-container { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 3; }
         .progress-bar { width: 80px; height: 4px; background: rgba(255, 255, 255, 0.2); border-radius: 2px; overflow: hidden; }
-        .progress-fill { height: 100%; background: #0f0; width: 0%; }
+        .progress-fill { height: 100%; background: #00b4d8; width: 0%; }
 
         /* AI Chat UI */
         .ai-chat-container { max-width: 800px; margin: 0 auto; background: #0a0c0a; border: 1px solid #2a332a; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
         .chat-header { background: #111511; padding: 20px; border-bottom: 1px solid #2a332a; display: flex; align-items: center; gap: 10px; }
-        .chat-header h3 { color: #0f0; font-size: 1.2rem; }
+        .chat-header h3 { color: #00b4d8; font-size: 1.2rem; }
         .chat-header span { color: #888; font-size: 0.9rem; }
         .chat-box { padding: 30px; height: 350px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; scroll-behavior: smooth; }
         .msg { max-width: 80%; padding: 15px 20px; border-radius: 20px; line-height: 1.6; font-size: 1rem; word-break: keep-all; animation: profileFadeIn 0.3s ease; }
         .ai-msg { background: #1a221a; color: #eee; align-self: flex-start; border-bottom-left-radius: 5px; border: 1px solid #2a332a; }
-        .user-msg { background: #0f0; color: #000; font-weight: 500; align-self: flex-end; border-bottom-right-radius: 5px; }
+        .user-msg { background: #00b4d8; color: #000; font-weight: 500; align-self: flex-end; border-bottom-right-radius: 5px; }
         .typing { display: none; align-self: flex-start; background: #1a221a; padding: 15px 20px; border-radius: 20px; border-bottom-left-radius: 5px; border: 1px solid #2a332a;}
-        .dot { display: inline-block; width: 8px; height: 8px; background: #0f0; border-radius: 50%; margin: 0 3px; animation: bounce 1.4s infinite ease-in-out both; }
+        .dot { display: inline-block; width: 8px; height: 8px; background: #00b4d8; border-radius: 50%; margin: 0 3px; animation: bounce 1.4s infinite ease-in-out both; }
         .dot:nth-child(1) { animation-delay: -0.32s; }
         .dot:nth-child(2) { animation-delay: -0.16s; }
         @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
         .chat-input-area { background: #111511; padding: 20px; border-top: 1px solid #2a332a; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-        .suggestion-btn { background: transparent; border: 1px solid #0f0; color: #0f0; padding: 10px 18px; border-radius: 30px; font-family: 'Pretendard', sans-serif; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; -webkit-tap-highlight-color: transparent;}
-        .suggestion-btn:hover, .suggestion-btn:active { background: #0f0; color: #000; }
+        .suggestion-btn { background: transparent; border: 1px solid #00b4d8; color: #00b4d8; padding: 10px 18px; border-radius: 30px; font-family: 'Pretendard', sans-serif; font-size: 0.95rem; cursor: pointer; transition: all 0.2s ease; -webkit-tap-highlight-color: transparent;}
+        .suggestion-btn:hover, .suggestion-btn:active { background: #00b4d8; color: #000; }
         .suggestion-btn:disabled { opacity: 0.5; cursor: not-allowed; border-color: #555; color: #555; }
 
         /* 모달 스타일 */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
-        .modal-content { background: #111; width: 90%; max-width: 800px; max-height: 85vh; overflow-y: auto; border-radius: 15px; border: 1px solid #0f0; padding: 50px; position: relative; transform: translateY(20px); transition: transform 0.3s ease; box-shadow: 0 20px 50px rgba(0,255,0,0.1); }
+        .modal-content { background: #111; width: 90%; max-width: 800px; max-height: 85vh; overflow-y: auto; border-radius: 15px; border: 1px solid #00b4d8; padding: 50px; position: relative; transform: translateY(20px); transition: transform 0.3s ease; box-shadow: 0 20px 50px rgba(0,255,0,0.1); }
         .modal-overlay.active { display: flex; opacity: 1; }
         .modal-overlay.active .modal-content { transform: translateY(0); }
         .close-btn { position: absolute; top: 20px; right: 30px; font-size: 2.5rem; color: #aaa; cursor: pointer; transition: color 0.2s; -webkit-tap-highlight-color: transparent;}
-        .close-btn:hover { color: #0f0; }
+        .close-btn:hover { color: #00b4d8; }
         .modal-header { border-bottom: 1px solid #333; padding-bottom: 20px; margin-bottom: 30px; }
         .modal-header h2 { font-size: 2.2rem; color: #fff; margin-bottom: 10px; font-weight: 800;}
-        .modal-header p { color: #0f0; font-weight: 500; font-size: 1.1rem; margin: 0; }
-        .modal-body h4 { font-size: 1.2rem; color: #fff; margin: 25px 0 15px 0; border-left: 4px solid #0f0; padding-left: 12px; }
+        .modal-header p { color: #00b4d8; font-weight: 500; font-size: 1.1rem; margin: 0; }
+        .modal-body h4 { font-size: 1.2rem; color: #fff; margin: 25px 0 15px 0; border-left: 4px solid #00b4d8; padding-left: 12px; }
         .modal-body p { color: #ccc; font-weight: 300; line-height: 1.7; margin-bottom: 15px; }
         .modal-tags { display: flex; gap: 10px; margin-top: 40px; flex-wrap: wrap; }
-        .modal-tags span { background: #222; color: #0f0; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; border: 1px solid #333; }
+        .modal-tags span { background: #222; color: #00b4d8; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; border: 1px solid #333; }
 
         /* 푸터 */
         footer { background: #080808; color: rgba(255,255,255,0.6); text-align: center; padding: 80px 20px 80px; font-weight: 300; border-top: 1px solid #111; position: relative; z-index: 2; }
         .contact-info { font-size: 1.2rem; margin-bottom: 20px; font-weight: 500; color: #fff; }
         .contact-info a { color: #fff; transition: color 0.2s ease; }
-        .contact-info a:hover { color: #0f0; text-decoration: underline; }
+        .contact-info a:hover { color: #00b4d8; text-decoration: underline; }
         .contact-info span { margin: 0 15px; color: #333; }
         footer p { margin: 5px 0; font-size: 0.9rem; }
 
         /* 🚨 커리어 별자리 타임라인 스타일 */
         .constellation-wrapper { position: relative; width: 90%; max-width: 800px; margin: 0 auto 40px; height: 30px; display: flex; justify-content: space-between; align-items: center; z-index: 5; }
         .constellation-track { position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: #2a332a; transform: translateY(-50%); z-index: 1; }
-        .constellation-fill { position: absolute; top: 50%; left: 0; width: 0%; height: 2px; background: #0f0; transform: translateY(-50%); z-index: 2; transition: width 0.2s ease-out; box-shadow: 0 0 10px #0f0; }
+        .constellation-fill { position: absolute; top: 50%; left: 0; width: 0%; height: 2px; background: #00b4d8; transform: translateY(-50%); z-index: 2; transition: width 0.2s ease-out; box-shadow: 0 0 10px #00b4d8; }
         .star-node { width: 30px; height: 30px; background: #111; border: 2px solid #2a332a; border-radius: 50%; z-index: 3; display: flex; justify-content: center; align-items: center; color: #555; font-size: 0.8rem; font-weight: 700; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 10px rgba(0,0,0,0.8); font-family: 'Montserrat', sans-serif; }
-        .star-node.active { border-color: #0f0; color: #000; background: #0f0; box-shadow: 0 0 15px rgba(0, 255, 0, 0.8); transform: scale(1.3); }
+        .star-node.active { border-color: #00b4d8; color: #000; background: #00b4d8; box-shadow: 0 0 15px rgba(0, 255, 0, 0.8); transform: scale(1.3); }
 
          /* 🚨 ROI 시뮬레이터 스타일 */
         .simulator-box { background: linear-gradient(145deg, #111 0%, #050505 100%); border: 1px solid #2a332a; border-radius: 20px; padding: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); margin: 0 auto; max-width: 900px; }
         .slider-labels { display: flex; justify-content: space-between; color: #888; font-weight: 700; margin-bottom: 20px; font-size: 1.1rem; }
-        .label-right { color: #0f0; transition: text-shadow 0.3s; }
+        .label-right { color: #00b4d8; transition: text-shadow 0.3s; }
         .slider-container { position: relative; width: 100%; height: 30px; margin-bottom: 40px; display: flex; align-items: center; }
         .roi-slider { -webkit-appearance: none; width: 100%; height: 8px; background: #222; border-radius: 5px; outline: none; z-index: 2; position: relative; cursor: pointer; }
-        .slider-track-fill { position: absolute; top: 50%; left: 0; height: 8px; background: linear-gradient(90deg, #ff5e00, #0f0); border-radius: 5px; transform: translateY(-50%); width: 0%; z-index: 1; pointer-events: none; }
+        .slider-track-fill { position: absolute; top: 50%; left: 0; height: 8px; background: linear-gradient(90deg, #ff5e00, #00b4d8); border-radius: 5px; transform: translateY(-50%); width: 0%; z-index: 1; pointer-events: none; }
         
         /* 슬라이더 손잡이(Thumb) 디자인 */
-        .roi-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: #0f0; cursor: pointer; border: 3px solid #000; box-shadow: 0 0 15px rgba(0,255,0,0.8); transition: transform 0.1s; }
+        .roi-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%; background: #00b4d8; cursor: pointer; border: 3px solid #000; box-shadow: 0 0 15px rgba(0,255,0,0.8); transition: transform 0.1s; }
         .roi-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
-        .roi-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: #0f0; cursor: pointer; border: 3px solid #000; box-shadow: 0 0 15px rgba(0,255,0,0.8); }
+        .roi-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: #00b4d8; cursor: pointer; border: 3px solid #000; box-shadow: 0 0 15px rgba(0,255,0,0.8); }
 
         .sim-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .sim-card { background: #080808; border: 1px solid #222; padding: 30px 20px; border-radius: 15px; text-align: center; transition: all 0.3s ease; }
@@ -267,8 +267,8 @@
         .sim-value { font-family: 'Montserrat', sans-serif !important; font-size: 2.5rem; font-weight: 900; color: #fff; transition: color 0.3s; }
         
         /* 100% 도달 시 네온 효과 */
-        .sim-card.maxed { border-color: #0f0; box-shadow: 0 0 20px rgba(0,255,0,0.1); background: rgba(0, 255, 0, 0.05); }
-        .sim-card.maxed .sim-value { color: #0f0; text-shadow: 0 0 15px rgba(0,255,0,0.5); }
+        .sim-card.maxed { border-color: #00b4d8; box-shadow: 0 0 20px rgba(0,255,0,0.1); background: rgba(0, 255, 0, 0.05); }
+        .sim-card.maxed .sim-value { color: #00b4d8; text-shadow: 0 0 15px rgba(0,255,0,0.5); }
         /* 🚨 Tech Arsenal (무한 롤링 배지) 스타일 */
         .marquee-container { width: 100%; overflow: hidden; background: #000; padding: 25px 0; position: relative; border-top: 1px solid #111; border-bottom: 1px solid #111; }
         .marquee-container::before, .marquee-container::after { content: ''; position: absolute; top: 0; width: 15%; height: 100%; z-index: 2; pointer-events: none; }
@@ -276,7 +276,7 @@
         .marquee-container::after { right: 0; background: linear-gradient(to left, #050505, transparent); }
         .marquee-track { display: flex; width: max-content; animation: scrollText 25s linear infinite; gap: 20px; padding-left: 20px; }
         .tech-badge { font-family: 'Montserrat', 'Pretendard', sans-serif; font-size: 1rem; color: #888; border: 1px solid #333; border-radius: 30px; padding: 10px 25px; background: rgba(255,255,255,0.02); transition: all 0.3s; white-space: nowrap; }
-        .tech-badge:hover { color: #000; background: #0f0; border-color: #0f0; box-shadow: 0 0 15px rgba(0,255,0,0.8); cursor: crosshair; }
+        .tech-badge:hover { color: #000; background: #00b4d8; border-color: #00b4d8; box-shadow: 0 0 15px rgba(0,255,0,0.8); cursor: crosshair; }
         @keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 10px)); } }
 
            
@@ -285,8 +285,8 @@
         /* 🚨 무기고 중앙 자동 점등용 클래스 (JS에서 제어함) */
         .tech-badge.neon-active {
             color: #000 !important;
-            background: #0f0 !important;
-            border-color: #0f0 !important;
+            background: #00b4d8 !important;
+            border-color: #00b4d8 !important;
             box-shadow: 0 0 20px rgba(0,255,0,0.9) !important;
             transform: scale(1.1); /* 스포트라이트 받을 때 살짝 커지는 효과 */
             z-index: 10;
@@ -363,17 +363,17 @@
             <iframe src="https://www.youtube.com/embed/fkt2qlciozI?autoplay=1&mute=1&controls=0&loop=1&playlist=fkt2qlciozI&playsinline=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         </div>
         
-        <div class="hero-title">
+     <div class="hero-title">
             <div class="top-line">
-                <span class="word-left">사람과</span>
-                <span class="word-right">비즈니스를</span>
+                <span class="word-left">상상을</span>
+                <span class="word-right">현실로</span>
             </div>
             <div class="bridge-line">
-                <span class="word-bridge">잇는</span>
+                <span class="word-bridge">만드는</span>
             </div>
-            <span class="word-power">압도적 기획력</span>
+            <span class="word-power">I2R Creative</span>
         </div>
-        <p>전략가 전상현의 포트폴리오입니다</p>
+        <p>비즈니스의 본질을 꿰뚫는 전략가 전상현입니다</p>
     </header>
 
     <section class="section reveal">
@@ -401,28 +401,28 @@
     <section class="section reveal">
     <div class="about-me" style="align-items: stretch;">
             
-            <div class="profile-img-container" style="flex: 1; flex-direction: column; display: flex;">
+        <div class="profile-img-container" style="flex: 1; flex-direction: column; display: flex;">
                 <img src="profile.png" alt="전상현 프로필 사진">
                 
                 <div class="profile-badge">
-                    <div class="badge-title">IDENTITY</div>
+                    <div class="badge-title">I2R CREATIVE</div>
                     <div class="badge-content">
-                        <span style="border-color: #0f0; color: #0f0;">#ENFJ</span>
-                        <span>#올라운더</span>
-                        <span>#전략기획</span>
+                        <span style="border-color: #00b4d8; color: #00b4d8;">#CEO_전상현</span>
+                        <span>#상상을현실로</span>
+                        <span>#디자인_컨설팅</span>
                     </div>
                     <div class="badge-quote">
-                        "비즈니스의 성공은 결국<br><strong>사람의 마음을 움직이는 것</strong>에서 시작됩니다."
+                        "I(상상)를 R(현실)로 만듭니다.<br><strong>비즈니스의 본질을 꿰뚫는 20년의 노하우</strong>"
                     </div>
                 </div>
             </div>
             
             <div class="about-me-text" style="flex: 1.5;">
-                <h3 style="margin-top: 0;">비즈니스의 본질을 꿰뚫는 전략가</h3>
-                <p>지난 20여 년간 통신, 무역, 커머스 등 대한민국 산업의 최전선에서 전략 기획과 마케팅을 주도해 온 실전형 전문가입니다. 단순히 기획에 머물지 않고 데이터 기반 유통 시뮬레이션, 대규모 상권 관리 등 실질적인 결과를 만들어왔습니다. 현재 상담복지학을 전공하며 타인을 이해하는 포용적 리더십을 갖추었으며, 다양한 산업군의 생태계를 누구보다 깊이 이해하고 있습니다.</p>
+                <h3 style="margin-top: 0;">상상이 현실이 되는 지점, I2R 크리에이티브가 함께합니다.</h3>
+                <p>우리는 20년이라는 시간 동안 수많은 아이디어가 실체가 되는 과정을 지켜봐 왔습니다. 대표자 <strong>'상현(상상을 현실로)'</strong>의 이름에 담긴 뜻처럼, 클라이언트의 모호한 상상(Imagination)을 단단한 현실(Reality)로 바꾸는 것이 우리의 사명입니다.<br><br>디자인은 단순히 아름다운 것을 만드는 작업이 아닙니다. 비즈니스의 본질을 꿰뚫는 <strong>인사이트(Insight)</strong>와 이를 실현하는 <strong>기술력(Reality)</strong>이 만났을 때 비로소 진정한 가치가 태어납니다. 배려 중심의 심리학적 접근과 20년 차 디자이너의 냉철한 감각으로, 당신의 비즈니스를 세상에 단 하나뿐인 브랜드로 완성해 드립니다.</p>
                 
                 <div class="resume-download">
-                    <a href="resume.pdf" target="_blank" class="download-btn">📥 상세 경력기술서 다운로드 (PDF)</a>
+                    <a href="resume.pdf" target="_blank" class="download-btn">📥 상세 회사소개서 및 경력기술서 다운로드 (PDF)</a>
                 </div>
 
                 <div class="skills-container" style="position: relative; width: 100%; max-width: 450px; margin: 20px auto 0;">
@@ -615,18 +615,20 @@
                 <button class="suggestion-btn" onclick="askQuestion('q1', '왜 전상현 기획자와 함께해야 하나요?')">왜 전상현 기획자와 함께해야 하나요?</button>
                 <button class="suggestion-btn" onclick="askQuestion('q2', '다양한 산업군을 거친 이력이 주는 장점은?')">다양한 산업군을 거친 이력이 주는 장점은?</button>
                 <button class="suggestion-btn" onclick="askQuestion('q3', '디자인/영상 외주 비용 0원은 어떻게 구현하나요?')">디자인/영상 외주 비용 0원은 어떻게 구현하나요?</button>
-                <button class="suggestion-btn" style="border-color: #ff5e00; color: #ff5e00;" onclick="showContactForm()">📬 1:1 다이렉트 문의하기</button>
+                <button class="suggestion-btn" style="border-color: #ff5e00; color: #ff5e00;" onclick="showContactForm()">🤝 I2R Creative와 비즈니스 파트너십 시작하기</button>
             </div>
         </div>
     </section>
 
-    <footer class="reveal">
+<footer class="reveal">
         <div class="contact-info">
             <a href="mailto:ssiat@kakao.com">E-mail. ssiat@kakao.com</a> 
             <span>|</span> 
             <a href="tel:010-7369-7369">Tel. 010-7369-7369</a>
         </div>
-        <p>© 2026 Jeon Sang-hyun. All rights reserved.</p>
+        <!-- 🚨 사업자 정보 추가 (정식 에이전시 신뢰도 부여) -->
+        <p style="color: #ccc; font-weight: 400; margin-bottom: 15px;">상호명 : I2R Creative | 대표 : 전상현 | 사업자등록번호 : [발급 후 입력]</p>
+        <p>© 2026 I2R Creative. All rights reserved.</p>
         <p style="margin-top: 20px; color: rgba(255,255,255,0.4); font-size: 0.85rem; word-break: keep-all;">어떤 산업군이든 비즈니스의 본질을 꿰뚫고, 압도적인 성과로 증명하겠습니다.</p>
     </footer>
 
@@ -701,7 +703,7 @@
                     cardCost.classList.add('maxed');
                     cardTime.classList.add('maxed');
                     cardAsset.classList.add('maxed');
-                    document.querySelector('.label-right').style.textShadow = '0 0 10px #0f0';
+                    document.querySelector('.label-right').style.textShadow = '0 0 10px #00b4d8';
                 } else {
                     cardCost.classList.remove('maxed');
                     cardTime.classList.remove('maxed');
@@ -903,11 +905,11 @@
                         // 🚨 여기에 절대 %를 붙이지 마세요!
                         data: [95, 90, 85, 90, 90, 95],
                         backgroundColor: 'rgba(0, 255, 0, 0.15)',
-                        borderColor: '#0f0',
+                        borderColor: '#00b4d8',
                         borderWidth: 2,
                         pointBackgroundColor: '#000',
-                        pointBorderColor: '#0f0',
-                        pointHoverBackgroundColor: '#0f0',
+                        pointBorderColor: '#00b4d8',
+                        pointHoverBackgroundColor: '#00b4d8',
                         pointHoverBorderColor: '#fff',
                         pointRadius: 4,
                         pointHoverRadius: 6
@@ -933,7 +935,7 @@
                         legend: { display: false },
                         tooltip: {
                             backgroundColor: 'rgba(0,0,0,0.8)',
-                            titleColor: '#0f0',
+                            titleColor: '#00b4d8',
                             bodyFont: { size: 14, weight: 'bold' },
                             displayColors: false
                         }
@@ -1156,20 +1158,20 @@
                 
                 // Formspree로 바로 쏘기 위한 UI (onclick 함수 이름 변경)
                 aiMsg.innerHTML = `멋진 제안을 기대합니다! 아래 폼을 작성해 주시면 제 이메일로 즉시 알림이 옵니다.<br><br>
-                <div style="background: #111; padding: 20px; border-radius: 15px; border: 1px solid #0f0; margin-top: 10px;">
+                <div style="background: #111; padding: 20px; border-radius: 15px; border: 1px solid #00b4d8; margin-top: 10px;">
                     <div style="margin-bottom: 15px; text-align: left;">
-                        <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">성함 / 기업명</label>
+                        <label style="display: block; font-size: 0.85rem; color: #00b4d8; margin-bottom: 5px;">성함 / 기업명</label>
                         <input type="text" id="visible-name" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit;">
                     </div>
                     <div style="margin-bottom: 15px; text-align: left;">
-                        <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">회신받을 이메일</label>
+                        <label style="display: block; font-size: 0.85rem; color: #00b4d8; margin-bottom: 5px;">회신받을 이메일</label>
                         <input type="email" id="visible-email" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit;">
                     </div>
                     <div style="margin-bottom: 15px; text-align: left;">
-                        <label style="display: block; font-size: 0.85rem; color: #0f0; margin-bottom: 5px;">문의 내용</label>
+                        <label style="display: block; font-size: 0.85rem; color: #00b4d8; margin-bottom: 5px;">문의 내용</label>
                         <textarea id="visible-message" rows="4" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; box-sizing: border-box; font-family: inherit; resize: vertical;"></textarea>
                     </div>
-                    <button onclick="submitToFormspree()" style="background: #0f0; color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.3s; font-family: inherit;">📬 전상현 기획자에게 메시지 보내기</button>
+                    <button onclick="submitToFormspree()" style="background: #00b4d8; color: #000; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; transition: background 0.3s; font-family: inherit;">📬 전상현 기획자에게 메시지 보내기</button>
                 </div>`;
                 
                 chatBox.insertBefore(aiMsg, typingIndicator);
