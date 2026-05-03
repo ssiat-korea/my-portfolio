@@ -82,22 +82,28 @@ video::-webkit-media-controls-panel {
         .word-bridge::before { content: ''; position: absolute; top: 50%; right: 120%; height: 3px; background: linear-gradient(270deg, #00b4d8, #ff5e00, transparent); box-shadow: -5px 0 10px rgba(255, 94, 0, 0.5); border-radius: 5px; animation: shootLeft 0.6s ease-out 1.5s forwards; }
         .word-bridge::after { content: ''; position: absolute; top: 50%; left: 120%; height: 3px; background: linear-gradient(90deg, #00b4d8, #ff5e00, transparent); box-shadow: 5px 0 10px rgba(255, 94, 0, 0.5); border-radius: 5px; animation: shootRight 0.6s ease-out 1.5s forwards; }
        /* 🚨 히어로 타이틀 시선 집중용 흰색 테두리 & 발광 효과 */
-        .word-power {
-            color: #00b4d8; /* I2R 메인 청록색 (기존 색상과 맞춤) */
-            font-size: 4.2rem; /* 크기는 기존 설정에 맞게 조절하세요 */
+       .word-power {
+            color: #00b4d8;
+            font-size: 4.2rem; 
             font-weight: 900;
             display: inline-block;
             
-            /* 핵심: 흰색 테두리와 3단 콤보 발광 효과 */
-            -webkit-text-stroke: 1.5px #ffffff; /* 뚜렷한 흰색 외곽선 */
+            -webkit-text-stroke: 1.5px #ffffff;
             text-shadow: 
-                0 0 15px rgba(255, 255, 255, 1),   /* 1단: 코어 주변 강한 흰빛 */
-                0 0 30px rgba(255, 255, 255, 0.8), /* 2단: 넓게 퍼지는 흰빛 */
-                0 0 50px rgba(0, 180, 216, 0.6);   /* 3단: 은은하게 퍼지는 브랜드 컬러 빛 */
+                0 0 15px rgba(255, 255, 255, 1),   
+                0 0 30px rgba(255, 255, 255, 0.8), 
+                0 0 50px rgba(0, 180, 216, 0.6);   
             
             z-index: 2;
             position: relative;
+
+            /* 🚨 새로 추가되는 애니메이션 부분 */
+            opacity: 0; /* 처음엔 투명하게 숨겨둠 */
+            transform: scale(0.8) translateY(20px); /* 살짝 작고 아래에 있는 상태로 대기 */
+            animation: popInBrand 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; 
+            animation-delay: 1.5s; /* ⏱️ 1.5초 기다렸다가 등장! (앞글자 나오는 시간에 맞춰 조절 가능) */
         }
+
         .hero p { font-size: 1.3rem; opacity: 0; font-weight: 300; letter-spacing: 1px; margin-top: 20px; animation: popUpPower 1s ease 2.6s forwards; color: rgba(255,255,255,0.7); }
 
         /* 섹션 공통 */
@@ -389,6 +395,17 @@ video::-webkit-media-controls-panel {
             .constellation-wrapper { width: 85%; margin-bottom: 30px; }
             .star-node { width: 24px; height: 24px; font-size: 0.7rem; }
             footer { padding: 40px 20px; }
+        }
+        /* 🚨 CSS 파일 맨 아래나 <style> 태그 안쪽 빈 공간에 추가 (통통 튀어나오는 모션) */
+        @keyframes popInBrand {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
     </style>
 </head>
