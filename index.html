@@ -192,15 +192,15 @@
   }
 
   /* contact */
-  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:start;}
-  @media (max-width:760px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:stretch;}
+  @media (max-width:760px){ .contact-grid{grid-template-columns:1fr;} .map-box{aspect-ratio:1/1;} }
   .contact-box{
     background:var(--bg-soft); border:1px solid var(--line); border-radius:var(--radius);
     padding:40px; box-shadow:var(--shadow);
   }
   .map-box{
-    aspect-ratio:1/1; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line);
-    box-shadow:var(--shadow); background:var(--bg-soft); position:relative;
+    border-radius:var(--radius); overflow:hidden; border:1px solid var(--line);
+    box-shadow:var(--shadow); background:var(--bg-soft); position:relative; min-height:100%;
   }
   .map-box iframe{width:100%; height:100%; border:0; display:block; filter:grayscale(.15) contrast(1.05);}
   .map-caption{
