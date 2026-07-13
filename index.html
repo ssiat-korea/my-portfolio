@@ -422,7 +422,9 @@
         <h4>기획·디자인</h4>
         <div class="stack-chip-row">
           <span class="chip">Photoshop</span>
+          <span class="chip">Illustrator</span>
           <span class="chip">Premiere</span>
+          <span class="chip">Final Cut Pro</span>
           <span class="chip">프롬프트 엔지니어링</span>
         </div>
       </div>
@@ -534,6 +536,20 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // 문의하기 폼과 지도 박스 높이를 픽셀 단위로 정확히 맞춤 (grid stretch만으론 살짝 어긋남)
+  (function () {
+    const contactBox = document.querySelector('.contact-box');
+    const mapBox = document.querySelector('.map-box');
+    if (!contactBox || !mapBox) return;
+    function syncHeight() {
+      if (window.innerWidth <= 760) { mapBox.style.height = ''; return; }
+      mapBox.style.height = contactBox.offsetHeight + 'px';
+    }
+    window.addEventListener('load', syncHeight);
+    window.addEventListener('resize', syncHeight);
+    setTimeout(syncHeight, 50);
+  })();
 
   // Formspree 연동 (기존 엔드포인트 유지)
   function submitToFormspree() {
