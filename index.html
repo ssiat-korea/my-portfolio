@@ -441,10 +441,12 @@
     </div>
     <div class="contact-grid">
       <div class="contact-box reveal">
-        <div class="field"><label>이름</label><input type="text" id="visible-name" required></div>
-        <div class="field"><label>답장받을 이메일</label><input type="email" id="visible-email" required></div>
-        <div class="field"><label>문의 내용</label><textarea id="visible-message" rows="4" required></textarea></div>
-        <button class="btn btn-gold" style="width:100%; justify-content:center;" onclick="submitToFormspree()">보내기</button>
+        <form id="contactForm" onsubmit="return submitToFormspree(event)">
+          <div class="field"><label for="visible-name">이름</label><input type="text" id="visible-name" name="name" required></div>
+          <div class="field"><label for="visible-email">답장받을 이메일</label><input type="email" id="visible-email" name="email" required></div>
+          <div class="field"><label for="visible-message">문의 내용</label><textarea id="visible-message" name="message" rows="4" required></textarea></div>
+          <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">보내기</button>
+        </form>
         <div class="contact-meta">
           아이투알 크리에이티브(i2R Creative) · 사업자등록번호 334-15-02754<br>
           대표 전상현 · 경남 창녕군 창녕읍 교상길 7
@@ -537,6 +539,15 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+  // 해시(#products 등)로 바로 진입하면 브라우저의 앵커 점프가 스크롤 이벤트 없이 일어날 수 있어
+  // reveal 애니메이션이 걸리지 않고 콘텐츠가 계속 숨어있는 경우가 있음 — 해시 진입 시엔 애니메이션 건너뛰고 즉시 표시.
+  if (location.hash) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+  }
+  window.addEventListener('hashchange', () => {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+  });
+
   // 문의하기 폼과 지도 박스 높이를 픽셀 단위로 정확히 맞춤 (grid stretch만으론 살짝 어긋남)
   (function () {
     const contactBox = document.querySelector('.contact-box');
@@ -551,12 +562,14 @@
     setTimeout(syncHeight, 50);
   })();
 
-  // Formspree 연동 (기존 엔드포인트 유지)
-  function submitToFormspree() {
+  // Formspree 연동 (기존 엔드포인트 유지) — <form onsubmit>으로 호출되므로 기본 제출 동작은 막고 fetch로 대체.
+  //   <form> 없이 button onclick만으로 동작하던 걸 실제 <form>으로 감싸 시맨틱·키보드 Enter 제출·JS 실패 시 폴백을 확보.
+  function submitToFormspree(event) {
+    event.preventDefault();
     const name = document.getElementById('visible-name').value;
     const email = document.getElementById('visible-email').value;
     const message = document.getElementById('visible-message').value;
-    if (!name || !email || !message) { alert('모든 항목을 입력해 주세요!'); return; }
+    if (!name || !email || !message) { alert('모든 항목을 입력해 주세요!'); return false; }
     const endpoint = "https://formspree.io/f/xeepwloe";
     fetch(endpoint, {
       method: "POST",
@@ -570,6 +583,7 @@
         document.getElementById('visible-message').value = '';
       } else { alert("전송에 실패했습니다. 잠시 후 다시 시도해 주세요."); }
     }).catch(() => alert("네트워크 오류가 발생했습니다."));
+    return false;
   }
 </script>
 </body>
