@@ -127,8 +127,13 @@
   .products{
     display:flex; gap:26px; overflow-x:auto; scroll-snap-type:x proximity;
     padding:10px max(24px, calc((100% - 1080px)/2 + 24px)) 36px;
-    scrollbar-width:none; -ms-overflow-style:none;
+    scrollbar-width:none; -ms-overflow-style:none; -webkit-overflow-scrolling:touch;
+    cursor:grab; justify-content:flex-start;
   }
+  /* 카드 전부가 뷰포트에 여유있게 들어가는 초광폭 화면에서는 왼쪽에 붙지 않고 가운데로. */
+  .products.fits{justify-content:center;}
+  .products.dragging{cursor:grabbing; scroll-snap-type:none;}
+  .products.dragging *{user-select:none;}
   .products::-webkit-scrollbar{display:none; height:0;}
   .card{
     flex:0 0 400px; scroll-snap-align:start;
@@ -138,6 +143,7 @@
   }
   @media (max-width:560px){ .card{flex-basis:82vw;} }
   .card:hover{transform:translateY(-4px); border-color:var(--gold-line);}
+  .card img{-webkit-user-drag:none;}
   .card-icon{width:88px; height:88px; border-radius:24px; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow);}
   .card-icon img{width:100%; height:100%; object-fit:cover;}
   .card h3{font-size:24px;}
@@ -554,17 +560,42 @@
   })();
 
   // products 가로 스크롤 — 스크롤바는 CSS로 숨기고, 끝까지 스크롤하면 오른쪽 페이드 힌트를 지운다.
+  // 카드가 전부 화면에 들어가는 초광폭 화면에서는 왼쪽에 붙지 않고 가운데 정렬로 전환한다.
+  // 휴대폰은 overflow-x:auto만으로 이미 손가락 스와이프가 되고, 데스크톱은 스크롤바를 숨겼기
+  // 때문에 마우스로 잡아끄는(click-drag) 대체 조작을 별도로 붙여준다.
   (function () {
     const scroller = document.querySelector('.products-scroll');
     const track = document.querySelector('.products');
     if (!scroller || !track) return;
+
     function checkEnd() {
       const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
       scroller.classList.toggle('at-end', atEnd);
     }
+    function checkFit() {
+      track.classList.toggle('fits', track.scrollWidth <= track.clientWidth + 1);
+    }
     track.addEventListener('scroll', checkEnd, { passive: true });
-    window.addEventListener('resize', checkEnd);
+    window.addEventListener('resize', () => { checkEnd(); checkFit(); });
     checkEnd();
+    checkFit();
+
+    // 데스크톱 마우스 드래그 — 터치는 브라우저 기본 스와이프를 그대로 쓰고 여긴 mouse 전용.
+    let dragging = false, startX = 0, startScroll = 0, moved = false;
+    track.addEventListener('mousedown', (e) => {
+      dragging = true; moved = false;
+      startX = e.pageX; startScroll = track.scrollLeft;
+      track.classList.add('dragging');
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      const dx = e.pageX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      track.scrollLeft = startScroll - dx;
+    });
+    window.addEventListener('mouseup', () => { dragging = false; track.classList.remove('dragging'); });
+    // 드래그하다 놓은 걸 카드 클릭으로 오인하지 않게 막는다.
+    track.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
   })();
 
   // 테마 토글 (prefers-color-scheme 기반 기본값 + 수동 오버라이드)
