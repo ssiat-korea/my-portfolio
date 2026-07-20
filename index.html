@@ -126,13 +126,15 @@
   .products-scroll.at-end::after{opacity:0;}
   .products{
     display:flex; gap:26px; overflow-x:auto; scroll-snap-type:x proximity;
-    padding:10px max(40px, calc((100% - 1080px)/2 + 40px)) 36px;
-    /* ★ 실측으로 확인한 핵심 버그: scroll-snap-type이 켜진 스크롤 컨테이너는 일반 padding을
-       "스크롤해서 지나칠 수 있는" 여백으로 취급해 초기 scrollLeft가 padding만큼 자동으로
-       밀려버린다(첫 카드가 화면엔 padding 안쪽에 있는데 실제로는 x=0에 딱 붙어 보이는 원인).
-       scroll-padding-*을 padding-*과 같은 값으로 맞춰줘야 스냅 계산이 그 여백을 존중한다. */
-    scroll-padding-left:max(40px, calc((100% - 1080px)/2 + 40px));
-    scroll-padding-right:max(40px, calc((100% - 1080px)/2 + 40px));
+    /* ★ padding을 뷰포트 폭에 비례해 무한정 키우면(예전 max() 버전) scrollWidth가 항상
+       clientWidth보다 정확히 일정량 더 커져서 "카드가 다 들어간다(fits)" 조건이 화면이
+       아무리 넓어도 절대 성립할 수 없었다(카드4+간격 1678px + 좌우padding 합이 뷰포트와
+       똑같은 비율로 늘어나 항상 뷰포트보다 678px 더 넓게 계산됨). clamp()로 padding 증가를
+       상한선(140px)에서 멈춰야 아주 넓은 화면에서 여백을 다 채우고도 남는 공간이 생겨
+       scrollWidth <= clientWidth가 되고, 그때 .fits 클래스가 붙어 중앙 정렬이 실제로 작동한다. */
+    padding:10px clamp(40px, calc((100% - 1080px)/2 + 40px), 140px) 36px;
+    scroll-padding-left:clamp(40px, calc((100% - 1080px)/2 + 40px), 140px);
+    scroll-padding-right:clamp(40px, calc((100% - 1080px)/2 + 40px), 140px);
     scrollbar-width:none; -ms-overflow-style:none; -webkit-overflow-scrolling:touch;
     cursor:grab; justify-content:flex-start;
   }
