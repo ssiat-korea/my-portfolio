@@ -127,12 +127,14 @@
   .products{
     display:flex; gap:26px; overflow-x:auto; scroll-snap-type:x proximity;
     padding:10px max(40px, calc((100% - 1080px)/2 + 40px)) 36px;
+    /* ★ 실측으로 확인한 핵심 버그: scroll-snap-type이 켜진 스크롤 컨테이너는 일반 padding을
+       "스크롤해서 지나칠 수 있는" 여백으로 취급해 초기 scrollLeft가 padding만큼 자동으로
+       밀려버린다(첫 카드가 화면엔 padding 안쪽에 있는데 실제로는 x=0에 딱 붙어 보이는 원인).
+       scroll-padding-*을 padding-*과 같은 값으로 맞춰줘야 스냅 계산이 그 여백을 존중한다. */
+    scroll-padding-left:max(40px, calc((100% - 1080px)/2 + 40px));
+    scroll-padding-right:max(40px, calc((100% - 1080px)/2 + 40px));
     scrollbar-width:none; -ms-overflow-style:none; -webkit-overflow-scrolling:touch;
-    cursor:grab;
-    /* safe center: 다 들어가면 가운데 정렬, 넘치면(overflow) 자동으로 시작점 정렬로 안전하게
-       빠진다 — 표준 CSS 기능이라 JS 계산 없이도 항상 정확하다. 구형 브라우저 대비 JS .fits
-       클래스도 이중으로 남겨둔다. */
-    justify-content:safe center;
+    cursor:grab; justify-content:flex-start;
   }
   .products.fits{justify-content:center;}
   .products.dragging{cursor:grabbing; scroll-snap-type:none;}
